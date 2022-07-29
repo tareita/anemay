@@ -1,4 +1,5 @@
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 const jwt = require("jsonwebtoken");
 
 const getAllPosts = async (req, res) => {
@@ -9,7 +10,10 @@ const getAllPosts = async (req, res) => {
 const getPost = async (req, res) => {
   const id = req.params.id;
   const post = await Post.findById(id).populate("author");
-  return res.send({ post });
+  const comments = await Comment.find({ post: id })
+    .populate("author")
+    .sort("-createdAt");
+  return res.send({ post, comments });
 };
 
 const createPost = async (req, res) => {
