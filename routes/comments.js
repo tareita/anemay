@@ -5,4 +5,8 @@ const auth = require("../middleware/auth");
 
 router.post("/", auth.verifyToken, commentController.createComment);
 
+router.delete("/:id", auth.verifyToken, commentController.deleteComment);
+
+router.patch("/:id", auth.verifyToken, commentController.updateComment);
+
 module.exports = router;

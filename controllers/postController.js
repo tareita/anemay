@@ -11,7 +11,7 @@ const getAllPosts = async (req, res) => {
 };
 
 const getPostsByTopic = async (req, res) => {
-  const { topicName } = req.body;
+  const { topicName } = req.params;
   const topic = await Topic.findOne({ name: topicName });
   const posts = await Post.find({ topic: topic._id })
     .populate("author -password")
@@ -26,6 +26,10 @@ const getPost = async (req, res) => {
     .populate("author")
     .sort("-createdAt");
   return res.send({ post, comments });
+};
+
+const getUserPosts = async (req, res) => {
+  const username = req.params.username;
 };
 
 const createPost = async (req, res) => {
@@ -71,4 +75,11 @@ const updatePost = async (req, res) => {
   return res.send(post);
 };
 
-module.exports = { getAllPosts, getPost, createPost, deletePost, updatePost };
+module.exports = {
+  getAllPosts,
+  getPostsByTopic,
+  getPost,
+  createPost,
+  deletePost,
+  updatePost,
+};
