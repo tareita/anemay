@@ -60,13 +60,13 @@ const updatePost = async (req, res) => {
   const newTitle = req.body.title;
   const newContent = req.body.content;
   const userId = req.user.id;
-  if (userId != id) {
-    return res.send("you are not authorised to do this");
-  }
   const post = await Post.findOneAndUpdate(
     { _id: id },
     { title: newTitle, content: newContent }
   );
+  if (userId != id) {
+    return res.send("you are not authorised to do this");
+  }
   return res.send(post);
 };
 
