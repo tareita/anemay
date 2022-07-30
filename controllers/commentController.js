@@ -15,4 +15,17 @@ const createComment = async (req, res) => {
   return res.send({ comment });
 };
 
-module.exports = { createComment };
+const deleteComment = async (req, res) => {
+  const commentId = req.params.id;
+  const userId = req.user.id;
+  const comment = await Comment.findOneAndDelete({ _id: commentId });
+  if (!comment) {
+    return res.send("comment not found");
+  }
+  if (userId != comment.author) {
+    return res.send("you cant delete someone elses comment");
+  }
+  return res.send(comment);
+};
+
+module.exports = { createComment, deleteComment };
