@@ -1,15 +1,27 @@
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const jwt = require("jsonwebtoken");
+const Topic = require("../models/Topic");
 
 const getAllPosts = async (req, res) => {
-  const posts = await Post.find().populate("author").sort("-createdAt");
+  const posts = await Post.find()
+    .populate("author -password")
+    .sort("-createdAt");
+  return res.send({ posts });
+};
+
+const getPostsByTopic = async (req, res) => {
+  const { topicName } = req.body;
+  const topic = await Topic.findOne({ name: topicName });
+  const posts = await Post.find({ topic: topic._id })
+    .populate("author -password")
+    .sort("-createdAt");
   return res.send({ posts });
 };
 
 const getPost = async (req, res) => {
   const id = req.params.id;
-  const post = await Post.findById(id).populate("author");
+  const post = await Post.findById(id).populate("author -password");
   const comments = await Comment.find({ post: id })
     .populate("author")
     .sort("-createdAt");
@@ -17,12 +29,14 @@ const getPost = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const { title, content } = req.body;
-  const { id } = req.user;
+  const { title, content, topicName } = req.body;
+  const topic = await Topic.findOne({ name: topicName });
+  const authorId = req.user.id;
   const post = new Post({
     title: title,
     content: content,
-    author: id,
+    author: authorId,
+    topic: topic._id,
   });
   await post.save();
   return res.send({ post });

@@ -38,4 +38,8 @@ const login = async (req, res) => {
   return res.send(responseData);
 };
 
+const getUserPosts = async (req, res) => {
+  const username = req.params.username;
+};
+
 module.exports = { register, login };
