@@ -43,30 +43,31 @@ const createPost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
-  const id = req.params.id;
-  const post = await Post.findOneAndDelete({ _id: id });
+  const postId = req.params.id;
   const userId = req.user.id;
-  if (userId != id) {
-    return res.send("you are not authorised to do this");
-  }
+  const post = await Post.findOne({ _id: postId });
   if (!post) {
     return res.send("post not found");
   }
+  if (userId != post.author) {
+    return res.send("you cant delete someone elses post");
+  }
+  await post.deleteOne();
   return res.send(post);
 };
 
 const updatePost = async (req, res) => {
-  const id = req.params.id;
-  const newTitle = req.body.title;
-  const newContent = req.body.content;
+  const postId = req.params.id;
+  const { title, content } = req.body;
   const userId = req.user.id;
-  const post = await Post.findOneAndUpdate(
-    { _id: id },
-    { title: newTitle, content: newContent }
-  );
-  if (userId != id) {
-    return res.send("you are not authorised to do this");
+  const post = await Post.findOne({ _id: postId });
+  if (!post) {
+    return res.send("post not found");
   }
+  if (post.author != userId) {
+    return res.send("post isnt yours");
+  }
+  await post.updateOne({ title, content });
   return res.send(post);
 };
 
