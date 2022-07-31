@@ -2,6 +2,7 @@ const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const jwt = require("jsonwebtoken");
 const Topic = require("../models/Topic");
+const User = require("../models/User");
 
 const getAllPosts = async (req, res) => {
   const posts = await Post.find()
@@ -23,13 +24,21 @@ const getPost = async (req, res) => {
   const id = req.params.id;
   const post = await Post.findById(id).populate("author -password");
   const comments = await Comment.find({ post: id })
-    .populate("author")
+    .populate("author -password")
     .sort("-createdAt");
   return res.send({ post, comments });
 };
 
 const getUserPosts = async (req, res) => {
   const username = req.params.username;
+  const user = await User.findOne(username);
+  if (!user) {
+    return res.send("this user doesnt exist");
+  }
+  const userPosts = await Post.find({ author: user._id })
+    .populate("author -password")
+    .sort("-createdAt");
+  return res.send({ userPosts });
 };
 
 const createPost = async (req, res) => {
