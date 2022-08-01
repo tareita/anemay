@@ -51,7 +51,7 @@ const createPost = async (req, res) => {
     content: content,
     author: authorId,
     topic: topic._id,
-    suko: 0,
+    sukoCount: 0,
   });
   await post.save();
   return res.send({ post });
@@ -72,12 +72,12 @@ const sukoPost = async (req, res) => {
     postId,
     userId,
   });
-  post.suko += 1;
+  post.sukoCount += 1;
   await post.save();
   return res.send({ post });
 };
 
-const kiraoPost = async (req, res) => {
+const unsukoPost = async (req, res) => {
   const userId = req.user.id;
   const postId = req.params.id;
   const post = await Post.findById(postId);
@@ -88,7 +88,7 @@ const kiraoPost = async (req, res) => {
   if (!existingSuko) {
     return res.send("like doesnt exist");
   }
-  await existingSuko.remove();
+  await existingSuko.deleteOne();
   post.suko -= 1;
   await post.save();
   return res.send({ post });
