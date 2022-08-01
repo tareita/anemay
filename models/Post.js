@@ -12,6 +12,7 @@ const postSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Topic",
     },
+    suko: Number,
   },
   { timestamps: true }
 );

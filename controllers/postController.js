@@ -3,6 +3,7 @@ const Comment = require("../models/Comment");
 const jwt = require("jsonwebtoken");
 const Topic = require("../models/Topic");
 const User = require("../models/User");
+const PostSuko = require("../models/PostSuko");
 
 const getAllPosts = async (req, res) => {
   const posts = await Post.find()
@@ -35,10 +36,10 @@ const getUserPosts = async (req, res) => {
   if (!user) {
     return res.send("this user doesnt exist");
   }
-  const userPosts = await Post.find({ author: user._id })
+  const posts = await Post.find({ author: user._id })
     .populate("author -password")
     .sort("-createdAt");
-  return res.send({ userPosts });
+  return res.send({ posts });
 };
 
 const createPost = async (req, res) => {
@@ -50,7 +51,45 @@ const createPost = async (req, res) => {
     content: content,
     author: authorId,
     topic: topic._id,
+    suko: 0,
   });
+  await post.save();
+  return res.send({ post });
+};
+
+const sukoPost = async (req, res) => {
+  const userId = req.user.id;
+  const postId = req.params.id;
+  const post = await Post.findById(postId);
+  if (!post) {
+    return res.send("post doesnt exist");
+  }
+  const existingSuko = await PostSuko.findOne({ userId, postId });
+  if (existingSuko) {
+    return res.send("you already liked this post");
+  }
+  await PostSuko.create({
+    postId,
+    userId,
+  });
+  post.suko += 1;
+  await post.save();
+  return res.send({ post });
+};
+
+const kiraoPost = async (req, res) => {
+  const userId = req.user.id;
+  const postId = req.params.id;
+  const post = await Post.findById(postId);
+  if (!post) {
+    return res.send("post doesnt exist");
+  }
+  const existingSuko = await PostLike.findOne({ postId, userId });
+  if (!existingSuko) {
+    return res.send("like doesnt exist");
+  }
+  await existingSuko.remove();
+  post.suko -= 1;
   await post.save();
   return res.send({ post });
 };
@@ -91,4 +130,5 @@ module.exports = {
   createPost,
   deletePost,
   updatePost,
+  getUserPosts,
 };
