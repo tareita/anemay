@@ -6,6 +6,8 @@ const cors = require("cors");
 dotenv.config();
 const { Schema } = mongoose;
 const posts = require("./routes/posts");
+const users = require("./routes/users");
+const comments = require("./routes/comments");
 
 app.listen(4000, () => {
   console.log("server started");
@@ -22,3 +24,5 @@ mongoose.connect(
 app.use(express.json());
 app.use(cors());
 app.use("/posts", posts);
+app.use("/users", users);
+app.use("/comments", comments);

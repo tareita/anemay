@@ -9,7 +9,7 @@ router.get("/topic/:topicName", postController.getPostsByTopic);
 
 router.get("/:id", postController.getPost);
 
-router.get("/user/:username", postController.getUserPosts);
+router.get("/users/:username", postController.getUserPosts);
 
 router.post("/", auth.verifyToken, postController.createPost);
 

@@ -11,6 +11,10 @@ const commentSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Post",
     },
+    repliedTo: {
+      type: mongoose.Types.ObjectId,
+      ref: "Comment",
+    },
   },
   { timestamps: true }
 );

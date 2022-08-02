@@ -6,9 +6,7 @@ const User = require("../models/User");
 const PostSuko = require("../models/PostSuko");
 
 const getAllPosts = async (req, res) => {
-  const posts = await Post.find()
-    .populate("author -password")
-    .sort("-createdAt");
+  const posts = await Post.find().populate("author").sort("-createdAt");
   return res.send({ posts });
 };
 
@@ -16,16 +14,20 @@ const getPostsByTopic = async (req, res) => {
   const { topicName } = req.params;
   const topic = await Topic.findOne({ name: topicName });
   const posts = await Post.find({ topic: topic._id })
-    .populate("author -password")
+    .populate("author")
     .sort("-createdAt");
   return res.send({ posts });
 };
 
 const getPost = async (req, res) => {
   const id = req.params.id;
-  const post = await Post.findById(id).populate("author -password");
+  const post = await Post.findById(id).populate("author");
   const comments = await Comment.find({ post: id })
-    .populate("author -password")
+    .populate("author")
+    .populate({
+      path: "repliedTo",
+      populate: { path: "author", model: "User" },
+    })
     .sort("-createdAt");
   return res.send({ post, comments });
 };
@@ -37,7 +39,7 @@ const getUserPosts = async (req, res) => {
     return res.send("this user doesnt exist");
   }
   const posts = await Post.find({ author: user._id })
-    .populate("author -password")
+    .populate("author")
     .sort("-createdAt");
   return res.send({ posts });
 };
@@ -47,8 +49,8 @@ const createPost = async (req, res) => {
   const topic = await Topic.findOne({ name: topicName });
   const authorId = req.user.id;
   const post = new Post({
-    title: title,
-    content: content,
+    title,
+    content,
     author: authorId,
     topic: topic._id,
     sukoCount: 0,
@@ -89,7 +91,7 @@ const unsukoPost = async (req, res) => {
     return res.send("like doesnt exist");
   }
   await existingSuko.deleteOne();
-  post.suko -= 1;
+  post.sukoCount -= 1;
   await post.save();
   return res.send({ post });
 };
@@ -131,4 +133,6 @@ module.exports = {
   deletePost,
   updatePost,
   getUserPosts,
+  sukoPost,
+  unsukoPost,
 };
