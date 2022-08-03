@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Topics from "./Topics";
 
 const HomePage = () => {
   return (
     <div>
-      <h1>
-        <Link to="posts">Posts</Link>
-      </h1>
+      <h1>Anemay</h1>
+      <Topics />
     </div>
   );
 };

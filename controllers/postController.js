@@ -34,7 +34,7 @@ const getPost = async (req, res) => {
 
 const getUserPosts = async (req, res) => {
   const username = req.params.username;
-  const user = await User.findOne(username);
+  const user = await User.findOne({ username });
   if (!user) {
     return res.send("this user doesnt exist");
   }
@@ -86,7 +86,7 @@ const unsukoPost = async (req, res) => {
   if (!post) {
     return res.send("post doesnt exist");
   }
-  const existingSuko = await PostLike.findOne({ postId, userId });
+  const existingSuko = await PostSuko.findOne({ postId, userId });
   if (!existingSuko) {
     return res.send("like doesnt exist");
   }

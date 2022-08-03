@@ -25,7 +25,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { username, password } = req.body;
-  const existingUser = await User.findOne({ username });
+  const existingUser = await User.findOne({ username }).select("+password");
   if (!existingUser) {
     return res.send({ message: "user does not exist" });
   }

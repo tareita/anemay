@@ -13,6 +13,10 @@ router.get("/users/:username", postController.getUserPosts);
 
 router.post("/", auth.verifyToken, postController.createPost);
 
+router.post("/suko/:id", auth.verifyToken, postController.sukoPost);
+
+router.post("/unsuko/:id", auth.verifyToken, postController.unsukoPost);
+
 router.delete("/:id", auth.verifyToken, postController.deletePost);
 
 router.patch("/:id", auth.verifyToken, postController.updatePost);
