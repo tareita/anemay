@@ -13,6 +13,9 @@ const getAllPosts = async (req, res) => {
 const getPostsByTopic = async (req, res) => {
   const { topicName } = req.params;
   const topic = await Topic.findOne({ name: topicName });
+  if (!topic) {
+    return res.send("topic not found");
+  }
   const posts = await Post.find({ topic: topic._id })
     .populate("author")
     .sort("-createdAt");

@@ -10,7 +10,7 @@ const Posts = () => {
     fetchPosts();
   }, []);
   const fetchPosts = async () => {
-    const res = await fetch("http://localhost:4000/posts/" + topicName);
+    const res = await fetch("http://localhost:4000/posts/topics/" + topicName);
     const data = await res.json();
     setPosts(data.posts);
   };
