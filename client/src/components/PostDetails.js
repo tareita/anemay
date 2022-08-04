@@ -1,14 +1,15 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import Comments from "./Comments";
-// import CreateComment from "./CreateComment";
+import Comments from "./Comments";
+import CreateComment from "./CreateComment";
 import { Navbar } from "./Navbar";
+import ReactMarkdown from "react-markdown";
 
 const PostDetails = () => {
   const { topicName, id } = useParams();
   const [post, setPost] = useState({});
-  //   const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([]);
   const { title, content, author } = post;
   useEffect(() => {
     fetchPost();
@@ -17,7 +18,7 @@ const PostDetails = () => {
     const res = await fetch("http://localhost:4000/posts/" + id);
     const data = await res.json();
     setPost(data.post);
-    // setComments(data.comments);
+    setComments(data.comments);
   };
   return (
     <div>
@@ -33,15 +34,20 @@ const PostDetails = () => {
               <h6 className="card-subtitle mb-2 text-muted">
                 {author.username}
               </h6>
-              <p className="card-text">{content}</p>
+
+              <p className="card-text">
+                <ReactMarkdown>{content}</ReactMarkdown>
+              </p>
             </div>
           </div>
-          {/* <CreateComment
+          <CreateComment
             post={post}
             setComments={setComments}
             comments={comments}
-          /> */}
-          <div>{/* <Comments comments={comments} /> */}</div>
+          />
+          <div>
+            <Comments comments={comments} />
+          </div>
         </div>
       )}
     </div>
