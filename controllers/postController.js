@@ -50,6 +50,10 @@ const getUserPosts = async (req, res) => {
 const createPost = async (req, res) => {
   const { title, content, topicName } = req.body;
   const topic = await Topic.findOne({ name: topicName });
+  console.log(topicName);
+  if (!topic) {
+    return res.send("topic not found");
+  }
   const authorId = req.user.id;
   const post = new Post({
     title,

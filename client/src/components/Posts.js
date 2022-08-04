@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import Post from "./Post";
 
@@ -18,6 +18,9 @@ const Posts = () => {
     <div>
       <Navbar />
       <h1 className="my-3">{topicName}</h1>
+      <div className="mb-3">
+        <Link to="create-post">Make your own post here</Link>
+      </div>
       <div>
         {posts.map((post, index) => (
           <Post post={post} key={index} />

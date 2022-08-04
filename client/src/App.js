@@ -4,6 +4,7 @@ import HomePage from "./components/HomePage";
 import Login from "./components/Login";
 import Posts from "./components/Posts";
 import Register from "./components/Register";
+import CreatePost from "./components/CreatePost";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/posts/:topicName" element={<Posts />} />
           <Route path="/posts/:topicName/:id" element={<PostDetails />} />
+          <Route
+            path="/posts/:topicName/create-post"
+            element={<CreatePost />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
