@@ -71,17 +71,18 @@ const sukoPost = async (req, res) => {
   const postId = req.params.id;
   const post = await Post.findById(postId);
   if (!post) {
-    return res.send("post doesnt exist");
+    return res.send({ message: "post doesnt exist" });
   }
   const existingSuko = await PostSuko.findOne({ userId, postId });
   if (existingSuko) {
-    return res.send("you already liked this post");
+    return res.send({ message: "you already liked this post" });
   }
   await PostSuko.create({
     postId,
     userId,
   });
-  post.sukoCount += 1;
+  const postSukos = await PostSuko.find({ postId });
+  post.sukoCount = postSukos.length;
   await post.save();
   return res.send({ post });
 };
@@ -91,14 +92,15 @@ const unsukoPost = async (req, res) => {
   const postId = req.params.id;
   const post = await Post.findById(postId);
   if (!post) {
-    return res.send("post doesnt exist");
+    return res.send({ message: "post doesnt exist" });
   }
   const existingSuko = await PostSuko.findOne({ postId, userId });
   if (!existingSuko) {
-    return res.send("like doesnt exist");
+    return res.send({ message: "like doesnt exist" });
   }
   await existingSuko.deleteOne();
-  post.sukoCount -= 1;
+  const postSukos = await PostSuko.find({ postId });
+  post.sukoCount = postSukos.length;
   await post.save();
   return res.send({ post });
 };
