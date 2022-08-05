@@ -9,8 +9,13 @@ const Suko = (props) => {
   const navigate = useNavigate();
 
   const sukoPost = async () => {
+    if (!props.liked) {
+      setSukoCount(props.sukoCount + 1);
+    } else {
+      setSukoCount(props.sukoCount);
+    }
     setSukod(true);
-    setSukoCount(props.sukoCount + 1);
+
     const res = await fetch(
       "http://localhost:4000/posts/suko/" + props.postId,
       {
@@ -23,8 +28,13 @@ const Suko = (props) => {
   };
 
   const unSukoPost = async () => {
+    if (!props.liked) {
+      setSukoCount(props.sukoCount);
+    } else {
+      setSukoCount(props.sukoCount - 1);
+    }
     setSukod(false);
-    setSukoCount(props.sukoCount);
+
     const res = await fetch(
       "http://localhost:4000/posts/unsuko/" + props.postId,
       {
