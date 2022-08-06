@@ -24,7 +24,21 @@ const getPostsByTopic = async (req, res) => {
 
 const getPost = async (req, res) => {
   const id = req.params.id;
-  const post = await Post.findById(id).populate("author");
+  const post = await Post.findById(id).populate("author").lean();
+  if (!post) {
+    return res.send({ message: "post not found" });
+  }
+  const user = req.user;
+  if (user) {
+    const userSuko = await PostSuko.findOne({
+      userId: user.id,
+      postId: post._id,
+    });
+    if (userSuko) {
+      post.sukod = true;
+    }
+  }
+
   const comments = await Comment.find({ post: id })
     .populate("author")
     .populate({

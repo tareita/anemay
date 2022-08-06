@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 const Suko = (props) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [sukoCount, setSukoCount] = useState(props.sukoCount);
-  const [sukod, setSukod] = useState(false);
-
+  const [sukod, setSukod] = useState(props.sukod);
   const navigate = useNavigate();
-
+  console.log(props.sukod);
   const sukoPost = async () => {
-    if (!props.liked) {
+    if (!props.sukod) {
       setSukoCount(props.sukoCount + 1);
     } else {
       setSukoCount(props.sukoCount);
@@ -28,7 +27,7 @@ const Suko = (props) => {
   };
 
   const unSukoPost = async () => {
-    if (!props.liked) {
+    if (!props.sukod) {
       setSukoCount(props.sukoCount);
     } else {
       setSukoCount(props.sukoCount - 1);

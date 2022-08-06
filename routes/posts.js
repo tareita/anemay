@@ -5,9 +5,13 @@ const auth = require("../middleware/auth");
 
 router.get("/", postController.getAllPosts);
 
-router.get("/topics/:topicName", postController.getPostsByTopic);
+router.get(
+  "/topics/:topicName",
+  auth.optionallyVerifyToken,
+  postController.getPostsByTopic
+);
 
-router.get("/:id", postController.getPost);
+router.get("/:id", auth.optionallyVerifyToken, postController.getPost);
 
 router.get("/users/:username", postController.getUserPosts);
 

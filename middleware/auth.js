@@ -11,4 +11,14 @@ const verifyToken = async (req, res, next) => {
   next();
 };
 
-module.exports = { verifyToken };
+const optionallyVerifyToken = async (req, res, next) => {
+  const { token } = req.headers;
+  if (!token) {
+    return next();
+  }
+  const decoded = jwt.decode(token, process.env.SECRET_KEY);
+  req.user = decoded;
+  next();
+};
+
+module.exports = { verifyToken, optionallyVerifyToken };
