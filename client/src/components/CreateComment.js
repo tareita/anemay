@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 
 const CreateComment = (props) => {
-  const { post, comments, setComments } = props;
+  const { post, comments, setComments, repliedTo, setReplying } = props;
   const user = JSON.parse(localStorage.getItem("user"));
   const [formData, setFormData] = useState({});
+
   const handleFormDataChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleSubmitClick = async (e) => {
     e.preventDefault();
-    const body = { ...formData, postId: post._id };
+    if (setReplying) {
+      setReplying(false);
+    }
+    const body = { ...formData, postId: post._id, repliedTo };
     const res = await fetch("http://localhost:4000/comments/", {
       method: "POST",
       body: JSON.stringify(body),
@@ -17,8 +22,9 @@ const CreateComment = (props) => {
     });
     const data = await res.json();
     const comment = data.comment;
-    setComments([comment, ...comments]);
+    setComments([...comments, comment]);
   };
+
   return (
     <div className="card">
       <div className="card-body">

@@ -58,8 +58,7 @@ const getPost = async (req, res) => {
     .populate({
       path: "repliedTo",
       populate: { path: "author", model: "User" },
-    })
-    .sort("-createdAt");
+    });
   return res.send({ post, comments });
 };
 

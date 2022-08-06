@@ -57,7 +57,11 @@ const PostDetails = () => {
             comments={comments}
           />
           <div>
-            <Comments comments={comments} />
+            <Comments
+              comments={comments}
+              post={post}
+              setComments={setComments}
+            />
           </div>
         </div>
       )}

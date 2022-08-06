@@ -10,6 +10,10 @@ const createComment = async (req, res) => {
     repliedTo,
   });
   await comment.populate("author");
+  await comment.populate({
+    path: "repliedTo",
+    populate: { path: "author", model: "User" },
+  });
   await comment.save();
 
   return res.send({ comment });
