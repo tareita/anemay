@@ -16,9 +16,24 @@ const getPostsByTopic = async (req, res) => {
   if (!topic) {
     return res.send("topic not found");
   }
+
   const posts = await Post.find({ topic: topic._id })
     .populate("author")
-    .sort("-createdAt");
+    .sort("-createdAt")
+    .lean();
+
+  const user = req.user;
+
+  if (user) {
+    const userSukos = await PostSuko.find({ userId: user.id });
+    posts.forEach((post) => {
+      userSukos.forEach((userSuko) => {
+        if (userSuko.postId.equals(post._id)) {
+          post.sukod = true;
+        }
+      });
+    });
+  }
   return res.send({ posts });
 };
 
@@ -38,7 +53,6 @@ const getPost = async (req, res) => {
       post.sukod = true;
     }
   }
-
   const comments = await Comment.find({ post: id })
     .populate("author")
     .populate({

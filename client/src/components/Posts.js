@@ -6,11 +6,20 @@ import Post from "./Post";
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const { topicName } = useParams();
+  const user = JSON.parse(localStorage.getItem("user"));
+
   useEffect(() => {
     fetchPosts();
   }, []);
+
   const fetchPosts = async () => {
-    const res = await fetch("http://localhost:4000/posts/topics/" + topicName);
+    let headers = {};
+    if (user) {
+      headers = { token: user.token };
+    }
+    const res = await fetch("http://localhost:4000/posts/topics/" + topicName, {
+      headers,
+    });
     const data = await res.json();
     setPosts(data.posts);
   };

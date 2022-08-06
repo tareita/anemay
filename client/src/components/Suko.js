@@ -6,7 +6,6 @@ const Suko = (props) => {
   const [sukoCount, setSukoCount] = useState(props.sukoCount);
   const [sukod, setSukod] = useState(props.sukod);
   const navigate = useNavigate();
-  console.log(props.sukod);
   const sukoPost = async () => {
     if (!props.sukod) {
       setSukoCount(props.sukoCount + 1);
