@@ -13,6 +13,7 @@ const PostDetails = () => {
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
   const [editing, setEditing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const { title, content, author, sukoCount, sukod } = post;
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
@@ -67,8 +68,17 @@ const PostDetails = () => {
             <div className="card-body">
               {user.username === author.username && (
                 <div>
-                  <button className="btn btn-danger" onClick={handleDeletePost}>
-                    Delete
+                  <button
+                    className="btn btn-danger"
+                    onClick={(e) => {
+                      if (!deleting) {
+                        setDeleting(true);
+                      } else {
+                        handleDeletePost(e);
+                      }
+                    }}
+                  >
+                    {!deleting ? <div>Delete</div> : <div>Confirm</div>}
                   </button>
                   <button
                     className="btn btn-warning mx-1"

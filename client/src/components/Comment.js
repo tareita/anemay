@@ -7,6 +7,7 @@ const Comment = (props) => {
   const { post, setComments, comments, comment } = props;
   const [replying, setReplying] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleDeleteComment = async (e) => {
@@ -85,9 +86,17 @@ const Comment = (props) => {
           )}
           {user.username === author.username && (
             <div className="my-2">
-              <button className="btn btn-danger" onClick={handleDeleteComment}>
-                {" "}
-                Delete{" "}
+              <button
+                className="btn btn-danger"
+                onClick={(e) => {
+                  if (!deleting) {
+                    setDeleting(true);
+                  } else {
+                    handleDeleteComment(e);
+                  }
+                }}
+              >
+                {!deleting ? <div>Delete</div> : <div>Confirm</div>}
               </button>
 
               <button
