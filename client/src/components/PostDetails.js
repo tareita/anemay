@@ -53,10 +53,12 @@ const PostDetails = () => {
           </div>
           <div className="card my-3">
             <div className="card-body">
-              <button className="btn btn-danger" onClick={handleDeletePost}>
-                {" "}
-                Delete{" "}
-              </button>
+              {user.username == author.username && (
+                <button className="btn btn-danger" onClick={handleDeletePost}>
+                  Delete
+                </button>
+              )}
+
               <Suko postId={post._id} sukoCount={sukoCount} sukod={sukod} />
               <h5 className="card-title">{title}</h5>
               <h6 className="card-subtitle mb-2 text-muted">
@@ -71,6 +73,7 @@ const PostDetails = () => {
             post={post}
             setComments={setComments}
             comments={comments}
+            setPost={setPost}
           />
           <div>
             <Comments

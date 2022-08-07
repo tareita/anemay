@@ -5,6 +5,17 @@ const Comment = (props) => {
   const { author, content, repliedTo, _id } = props.comment;
   const { post, setComments, comments } = props;
   const [replying, setReplying] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const handleDeleteComment = async (e) => {
+    e.preventDefault();
+    const res = await fetch("http://localhost:4000/comments/" + _id, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", token: user.token },
+    });
+    const data = await res.json();
+    setComments(comments.filter((comment) => _id != comment._id));
+  };
 
   return (
     <div>
@@ -42,7 +53,12 @@ const Comment = (props) => {
               />
             </div>
           )}
-          <button className="btn btn-danger"> Delete </button>
+          {user.username == author.username && (
+            <button className="btn btn-danger" onClick={handleDeleteComment}>
+              {" "}
+              Delete{" "}
+            </button>
+          )}
         </div>
       </div>
     </div>
