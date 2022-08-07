@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Comments from "./Comments";
 import CreateComment from "./CreateComment";
@@ -13,6 +13,7 @@ const PostDetails = () => {
   const [comments, setComments] = useState([]);
   const { title, content, author, sukoCount, sukod } = post;
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPost();
@@ -31,6 +32,17 @@ const PostDetails = () => {
     setComments(data.comments);
   };
 
+  const handleDeletePost = async (e) => {
+    e.preventDefault();
+    const res = await fetch("http://localhost:4000/posts/" + id, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", token: user.token },
+    });
+    const data = await res.json();
+    setPost(data.post);
+    navigate("/posts/" + topicName);
+  };
+
   return (
     <div>
       {Object.keys(post).length !== 0 && (
@@ -41,6 +53,10 @@ const PostDetails = () => {
           </div>
           <div className="card my-3">
             <div className="card-body">
+              <button className="btn btn-danger" onClick={handleDeletePost}>
+                {" "}
+                Delete{" "}
+              </button>
               <Suko postId={post._id} sukoCount={sukoCount} sukod={sukod} />
               <h5 className="card-title">{title}</h5>
               <h6 className="card-subtitle mb-2 text-muted">

@@ -17,7 +17,6 @@ const CreatePost = () => {
 
   const handleSubmitClick = async (e) => {
     e.preventDefault();
-    console.log(formData);
     const res = await fetch("http://localhost:4000/posts", {
       method: "POST",
       body: JSON.stringify(formData),

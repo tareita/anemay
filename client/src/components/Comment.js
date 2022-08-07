@@ -5,7 +5,7 @@ const Comment = (props) => {
   const { author, content, repliedTo, _id } = props.comment;
   const { post, setComments, comments } = props;
   const [replying, setReplying] = useState(false);
-  console.log(repliedTo);
+
   return (
     <div>
       <div className="card mb-3">
@@ -42,6 +42,7 @@ const Comment = (props) => {
               />
             </div>
           )}
+          <button className="btn btn-danger"> Delete </button>
         </div>
       </div>
     </div>
