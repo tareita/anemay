@@ -157,7 +157,7 @@ const updatePost = async (req, res) => {
   if (post.author != userId) {
     return res.send("post isnt yours");
   }
-  await post.updateOne({ title, content });
+  await post.updateOne({ title, content, edited: true });
   return res.send(post);
 };
 

@@ -13,6 +13,7 @@ const postSchema = new mongoose.Schema(
       ref: "Topic",
     },
     sukoCount: Number,
+    edited: Boolean,
   },
   { timestamps: true }
 );

@@ -23,8 +23,9 @@ const CreateComment = (props) => {
     const data = await res.json();
     const comment = data.comment;
     setComments([...comments, comment]);
+    setFormData({ ...formData, content: "" });
   };
-
+  console.log(formData.content);
   return (
     <div className="card">
       <div className="card-body">
@@ -39,10 +40,12 @@ const CreateComment = (props) => {
               name="content"
             />
           </div>
+
           <button
             type="submit"
             className="btn btn-primary"
             onClick={handleSubmitClick}
+            disabled={!formData.content}
           >
             Submit
           </button>

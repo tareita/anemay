@@ -44,7 +44,7 @@ const updateComment = async (req, res) => {
   if (comment.author != userId) {
     return res.send("comment isnt yours");
   }
-  await comment.updateOne({ content });
+  await comment.updateOne({ content, edited: true });
   return res.send(comment);
 };
 

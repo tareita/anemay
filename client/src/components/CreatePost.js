@@ -56,6 +56,7 @@ const CreatePost = () => {
           type="submit"
           className="btn btn-primary"
           onClick={handleSubmitClick}
+          disabled={!formData.content}
         >
           Submit
         </button>

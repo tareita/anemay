@@ -6,11 +6,13 @@ import CreateComment from "./CreateComment";
 import { Navbar } from "./Navbar";
 import ReactMarkdown from "react-markdown";
 import Suko from "./Suko";
+import ContentEditor from "./ContentEditor";
 
 const PostDetails = () => {
   const { topicName, id } = useParams();
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
+  const [editing, setEditing] = useState(false);
   const { title, content, author, sukoCount, sukod } = post;
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
@@ -43,6 +45,16 @@ const PostDetails = () => {
     navigate("/posts/" + topicName);
   };
 
+  const handleSubmitEdit = async (e, formData) => {
+    e.preventDefault();
+    await fetch("http://localhost:4000/posts/" + id, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", token: user.token },
+    });
+    setPost({ ...post, content: formData.content, edited: true });
+    setEditing(false);
+  };
+
   return (
     <div>
       {Object.keys(post).length !== 0 && (
@@ -54,19 +66,38 @@ const PostDetails = () => {
           <div className="card my-3">
             <div className="card-body">
               {user.username === author.username && (
-                <button className="btn btn-danger" onClick={handleDeletePost}>
-                  Delete
-                </button>
+                <div>
+                  <button className="btn btn-danger" onClick={handleDeletePost}>
+                    Delete
+                  </button>
+                  <button
+                    className="btn btn-warning mx-1"
+                    onClick={() => {
+                      setEditing(!editing);
+                    }}
+                  >
+                    {editing ? <div>Cancel</div> : <div>Edit</div>}
+                  </button>
+                </div>
               )}
-
               <Suko postId={post._id} sukoCount={sukoCount} sukod={sukod} />
-              <h5 className="card-title">{title}</h5>
+              <h5 className="card-title mr-2">{title}</h5>
+              {post.edited && <span className="text-muted">(Edited)</span>}
               <h6 className="card-subtitle mb-2 text-muted">
                 {author.username}
               </h6>
-              <p className="card-text">
-                <ReactMarkdown>{content}</ReactMarkdown>
-              </p>
+              {editing ? (
+                <div>
+                  <ContentEditor
+                    handleSubmitEdit={handleSubmitEdit}
+                    content={content}
+                  />
+                </div>
+              ) : (
+                <p className="card-text">
+                  <ReactMarkdown>{content}</ReactMarkdown>
+                </p>
+              )}
             </div>
           </div>
           <CreateComment

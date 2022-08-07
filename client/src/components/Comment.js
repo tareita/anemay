@@ -1,29 +1,48 @@
 import React, { useState } from "react";
-import ContentEditor from "./CommentEditor";
+import ContentEditor from "./ContentEditor";
 import CreateComment from "./CreateComment";
 
 const Comment = (props) => {
   const { author, content, repliedTo, _id } = props.comment;
-  const { post, setComments, comments } = props;
+  const { post, setComments, comments, comment } = props;
   const [replying, setReplying] = useState(false);
   const [editing, setEditing] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleDeleteComment = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/comments/" + _id, {
+    await fetch("http://localhost:4000/comments/" + _id, {
       method: "DELETE",
       headers: { "Content-Type": "application/json", token: user.token },
     });
-    const data = await res.json();
-    setComments(comments.filter((comment) => _id != comment._id));
+    setComments(comments.filter((comment) => _id !== comment._id));
+  };
+
+  const handleSubmitEdit = async (e, formData) => {
+    e.preventDefault();
+    await fetch("http://localhost:4000/comments/" + _id, {
+      method: "PATCH",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json", token: user.token },
+    });
+    setComments(
+      comments.map((commentToEdit) => {
+        if (commentToEdit._id === comment._id) {
+          return { ...comment, content: formData.content, edited: true };
+        } else {
+          return commentToEdit;
+        }
+      })
+    );
+    setEditing(false);
   };
 
   return (
     <div>
       <div className="card mb-3">
         <div className="card-body">
-          <h5 className="card-subtitle mb-2 text-muted">{author.username}</h5>{" "}
+          <h5 className="card-subtitle mb-2 text-muted">{author.username}</h5>
+          {comment.edited && <span className="text-muted">(Edited)</span>}
           {repliedTo && (
             <div
               className="card card-body my-3"
@@ -35,7 +54,16 @@ const Comment = (props) => {
               <p className="card-text">{repliedTo.content}</p>
             </div>
           )}
-          <p className="card-text">{content}</p>
+          {editing ? (
+            <div>
+              <ContentEditor
+                handleSubmitEdit={handleSubmitEdit}
+                content={content}
+              />
+            </div>
+          ) : (
+            <p className="card-text">{content}</p>
+          )}
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -55,31 +83,21 @@ const Comment = (props) => {
               />
             </div>
           )}
-          {user.username == author.username && (
+          {user.username === author.username && (
             <div className="my-2">
               <button className="btn btn-danger" onClick={handleDeleteComment}>
                 {" "}
                 Delete{" "}
               </button>
+
               <button
                 className="btn btn-warning mx-1"
                 onClick={() => {
                   setEditing(!editing);
                 }}
               >
-                Edit
+                {editing ? <div>Cancel</div> : <div>Edit</div>}
               </button>
-            </div>
-          )}
-          {editing && (
-            <div>
-              <ContentEditor
-                id={_id}
-                comment={props.comment}
-                setComments={setComments}
-                comments={comments}
-                setEditing={setEditing}
-              />
             </div>
           )}
         </div>
