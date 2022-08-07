@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import ContentEditor from "./CommentEditor";
 import CreateComment from "./CreateComment";
 
 const Comment = (props) => {
   const { author, content, repliedTo, _id } = props.comment;
   const { post, setComments, comments } = props;
   const [replying, setReplying] = useState(false);
+  const [editing, setEditing] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleDeleteComment = async (e) => {
@@ -54,10 +56,31 @@ const Comment = (props) => {
             </div>
           )}
           {user.username == author.username && (
-            <button className="btn btn-danger" onClick={handleDeleteComment}>
-              {" "}
-              Delete{" "}
-            </button>
+            <div className="my-2">
+              <button className="btn btn-danger" onClick={handleDeleteComment}>
+                {" "}
+                Delete{" "}
+              </button>
+              <button
+                className="btn btn-warning mx-1"
+                onClick={() => {
+                  setEditing(!editing);
+                }}
+              >
+                Edit
+              </button>
+            </div>
+          )}
+          {editing && (
+            <div>
+              <ContentEditor
+                id={_id}
+                comment={props.comment}
+                setComments={setComments}
+                comments={comments}
+                setEditing={setEditing}
+              />
+            </div>
           )}
         </div>
       </div>

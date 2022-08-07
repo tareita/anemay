@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Suko = (props) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [sukoCount, setSukoCount] = useState(props.sukoCount);
   const [sukod, setSukod] = useState(props.sukod);
-  const navigate = useNavigate();
+
   const sukoPost = async () => {
     if (!props.sukod) {
       setSukoCount(props.sukoCount + 1);
@@ -14,15 +13,10 @@ const Suko = (props) => {
     }
     setSukod(true);
 
-    const res = await fetch(
-      "http://localhost:4000/posts/suko/" + props.postId,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json", token: user.token },
-      }
-    );
-    let data = await res.json();
-    console.log(data);
+    await fetch("http://localhost:4000/posts/suko/" + props.postId, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", token: user.token },
+    });
   };
 
   const unSukoPost = async () => {
@@ -33,14 +27,10 @@ const Suko = (props) => {
     }
     setSukod(false);
 
-    const res = await fetch(
-      "http://localhost:4000/posts/unsuko/" + props.postId,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json", token: user.token },
-      }
-    );
-    let data = await res.json();
+    await fetch("http://localhost:4000/posts/unsuko/" + props.postId, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", token: user.token },
+    });
   };
 
   return (
