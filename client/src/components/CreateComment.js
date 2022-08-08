@@ -25,7 +25,7 @@ const CreateComment = (props) => {
     setComments([...comments, comment]);
     setFormData({ ...formData, content: "" });
   };
-  console.log(formData.content);
+
   return (
     <div className="card">
       <div className="card-body">

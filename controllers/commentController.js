@@ -1,5 +1,7 @@
 const Comment = require("../models/Comment");
 
+const getUserComments = async (req, res) => {};
+
 const createComment = async (req, res) => {
   const { postId, content, repliedTo } = req.body;
   const { id } = req.user;

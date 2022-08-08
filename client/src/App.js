@@ -21,7 +21,7 @@ function App() {
             path="/posts/:topicName/create-post"
             element={<CreatePost />}
           />
-          <Route path="/users/:id" element={<UserProfile />} />
+          <Route path="/users/:username" element={<UserProfile />} />
         </Routes>
       </BrowserRouter>
     </div>

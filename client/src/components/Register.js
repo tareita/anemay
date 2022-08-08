@@ -10,7 +10,6 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleSubmitClick = async (e) => {
-    console.log(formData);
     e.preventDefault();
     const res = await fetch("http://localhost:4000/users/register", {
       method: "POST",

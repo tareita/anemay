@@ -13,7 +13,11 @@ router.get(
 
 router.get("/:id", auth.optionallyVerifyToken, postController.getPost);
 
-router.get("/users/:username", postController.getUserPosts);
+router.get(
+  "/users/:username",
+  auth.optionallyVerifyToken,
+  postController.getUserPosts
+);
 
 router.post("/", auth.verifyToken, postController.createPost);
 

@@ -94,7 +94,7 @@ const PostDetails = () => {
               <h5 className="card-title mr-2">{title}</h5>
               {post.edited && <span className="text-muted">(Edited)</span>}
               <h6 className="card-subtitle mb-2 text-muted">
-                <Link to={"/users/" + author._id}>{author.username}</Link>
+                <Link to={"/users/" + author.username}>{author.username}</Link>
               </h6>
               {editing ? (
                 <div>

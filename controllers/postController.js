@@ -6,7 +6,10 @@ const User = require("../models/User");
 const PostSuko = require("../models/PostSuko");
 
 const getAllPosts = async (req, res) => {
-  const posts = await Post.find().populate("author").sort("-createdAt");
+  const posts = await Post.find()
+    .populate("author")
+    .populate("topic")
+    .sort("-createdAt");
   return res.send({ posts });
 };
 
@@ -19,9 +22,16 @@ const getPostsByTopic = async (req, res) => {
 
   const posts = await Post.find({ topic: topic._id })
     .populate("author")
+    .populate("topic")
     .sort("-createdAt")
     .lean();
 
+  await setExistingSukos(req, posts);
+
+  return res.send({ posts });
+};
+
+const setExistingSukos = async (req, posts) => {
   const user = req.user;
 
   if (user) {
@@ -34,7 +44,6 @@ const getPostsByTopic = async (req, res) => {
       });
     });
   }
-  return res.send({ posts });
 };
 
 const getPost = async (req, res) => {
@@ -64,20 +73,27 @@ const getPost = async (req, res) => {
 
 const getUserPosts = async (req, res) => {
   const username = req.params.username;
+
   const user = await User.findOne({ username });
+
   if (!user) {
     return res.send("this user doesnt exist");
   }
+
   const posts = await Post.find({ author: user._id })
     .populate("author")
-    .sort("-createdAt");
+    .populate("topic")
+    .sort("-createdAt")
+    .lean();
+
+  await setExistingSukos(req, posts);
+
   return res.send({ posts });
 };
 
 const createPost = async (req, res) => {
   const { title, content, topicName } = req.body;
   const topic = await Topic.findOne({ name: topicName });
-  console.log(topicName);
   if (!topic) {
     return res.send("topic not found");
   }

@@ -44,7 +44,7 @@ const Comment = (props) => {
       <div className="card mb-3">
         <div className="card-body">
           <h5 className="card-subtitle mb-2 text-muted">
-            <Link to={"/users/" + author._id}>{author.username}</Link>
+            <Link to={"/users/" + author.username}>{author.username}</Link>
           </h5>
           {comment.edited && <span className="text-muted">(Edited)</span>}
           {repliedTo && (
