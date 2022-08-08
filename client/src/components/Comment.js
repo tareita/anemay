@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ContentEditor from "./ContentEditor";
 import CreateComment from "./CreateComment";
 
@@ -42,7 +43,9 @@ const Comment = (props) => {
     <div>
       <div className="card mb-3">
         <div className="card-body">
-          <h5 className="card-subtitle mb-2 text-muted">{author.username}</h5>
+          <h5 className="card-subtitle mb-2 text-muted">
+            <Link to={"/users/" + author._id}>{author.username}</Link>
+          </h5>
           {comment.edited && <span className="text-muted">(Edited)</span>}
           {repliedTo && (
             <div

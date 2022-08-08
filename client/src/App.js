@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Posts from "./components/Posts";
 import Register from "./components/Register";
 import CreatePost from "./components/CreatePost";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             path="/posts/:topicName/create-post"
             element={<CreatePost />}
           />
+          <Route path="/users/:id" element={<UserProfile />} />
         </Routes>
       </BrowserRouter>
     </div>
