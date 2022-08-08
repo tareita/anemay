@@ -21,6 +21,7 @@ const Posts = () => {
       headers,
     });
     const data = await res.json();
+
     setPosts(data.posts);
   };
   return (

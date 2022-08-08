@@ -1,6 +1,22 @@
 const Comment = require("../models/Comment");
+const User = require("../models/User");
 
-const getUserComments = async (req, res) => {};
+const getUserComments = async (req, res) => {
+  const { username } = req.params;
+  const user = await User.findOne({ username });
+  if (!user) {
+    return res.send({ message: "no user found" });
+  }
+
+  const comments = await Comment.find({ author: user._id })
+    .sort("-createdAt")
+    .populate({
+      path: "post",
+      populate: { path: "topic", model: "Topic" },
+    })
+    .populate("author");
+  return res.send({ comments });
+};
 
 const createComment = async (req, res) => {
   const { postId, content, repliedTo } = req.body;
@@ -50,4 +66,9 @@ const updateComment = async (req, res) => {
   return res.send(comment);
 };
 
-module.exports = { createComment, deleteComment, updateComment };
+module.exports = {
+  createComment,
+  deleteComment,
+  updateComment,
+  getUserComments,
+};

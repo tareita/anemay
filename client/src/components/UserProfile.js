@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Comment from "./Comment";
 import Post from "./Post";
+import UserComment from "./UserComment";
 
 const UserProfile = () => {
   const { username } = useParams();
   const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
   const [tab, setTab] = useState("posts");
 
   useEffect(() => {
     fetchPosts();
+    fetchComments();
   }, []);
 
   const fetchPosts = async () => {
@@ -24,10 +28,16 @@ const UserProfile = () => {
     setPosts(data.posts);
   };
 
+  const fetchComments = async () => {
+    const res = await fetch("http://localhost:4000/comments/users/" + username);
+    const data = await res.json();
+    setComments(data.comments);
+  };
+
   return (
     <div>
       <h2>{username}'s profile </h2>
-      <ul className="nav nav-tabs">
+      <ul className="nav nav-tabs mb-4">
         <li className="nav-item">
           <a
             className={`nav-link ${tab == "posts" && "active"}`}
@@ -53,6 +63,13 @@ const UserProfile = () => {
         <div>
           {posts.map((post, index) => (
             <Post post={post} key={index} />
+          ))}
+        </div>
+      )}
+      {tab == "comments" && (
+        <div>
+          {comments.map((comment, index) => (
+            <UserComment comment={comment} key={index} />
           ))}
         </div>
       )}

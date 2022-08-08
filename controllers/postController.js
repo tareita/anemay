@@ -159,6 +159,7 @@ const deletePost = async (req, res) => {
     return res.send("you cant delete someone elses post");
   }
   await post.deleteOne();
+  await Comment.deleteMany({ post: post._id });
   return res.send(post);
 };
 
