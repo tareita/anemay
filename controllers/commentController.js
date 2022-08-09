@@ -40,11 +40,12 @@ const createComment = async (req, res) => {
 const deleteComment = async (req, res) => {
   const commentId = req.params.id;
   const userId = req.user.id;
+  const isAdmin = req.user.isAdmin;
   const comment = await Comment.findOne({ _id: commentId });
   if (!comment) {
     return res.send({ message: "comment not found" });
   }
-  if (userId != comment.author) {
+  if (userId != comment.author && !isAdmin) {
     return res.send({ message: "you cant delete someone elses comment" });
   }
   await comment.deleteOne();
@@ -54,12 +55,13 @@ const deleteComment = async (req, res) => {
 const updateComment = async (req, res) => {
   const commentId = req.params.id;
   const userId = req.user.id;
+  const isAdmin = req.user.isAdmin;
   const { content } = req.body;
   const comment = await Comment.findOne({ _id: commentId });
   if (!comment) {
     return res.send("comment not found");
   }
-  if (comment.author != userId) {
+  if (comment.author != userId && !isAdmin) {
     return res.send("comment isnt yours");
   }
   await comment.updateOne({ content, edited: true });

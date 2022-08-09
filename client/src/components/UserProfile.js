@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Comment from "./Comment";
+import { Navbar } from "./Navbar";
 import Post from "./Post";
+import UserAboutMe from "./UserAboutMe";
 import UserComment from "./UserComment";
 
 const UserProfile = () => {
@@ -10,6 +11,7 @@ const UserProfile = () => {
   const [comments, setComments] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
   const [tab, setTab] = useState("posts");
+  const [profileUser, setProfileUser] = useState();
 
   useEffect(() => {
     fetchPosts();
@@ -26,6 +28,7 @@ const UserProfile = () => {
     });
     const data = await res.json();
     setPosts(data.posts);
+    setProfileUser(data.user);
   };
 
   const fetchComments = async () => {
@@ -36,6 +39,7 @@ const UserProfile = () => {
 
   return (
     <div>
+      <Navbar />
       <h2>{username}'s profile </h2>
       <ul className="nav nav-tabs mb-4">
         <li className="nav-item">
@@ -59,20 +63,30 @@ const UserProfile = () => {
           </a>
         </li>
       </ul>
-      {tab == "posts" && (
-        <div>
-          {posts.map((post, index) => (
-            <Post post={post} key={index} />
-          ))}
+      <div className="row">
+        <div className="col-sm-8 mr-10">
+          {tab == "posts" && (
+            <div>
+              {posts.map((post, index) => (
+                <Post post={post} key={index} />
+              ))}
+            </div>
+          )}
+          {tab == "comments" && (
+            <div>
+              {comments.map((comment, index) => (
+                <UserComment comment={comment} key={index} />
+              ))}
+            </div>
+          )}
         </div>
-      )}
-      {tab == "comments" && (
-        <div>
-          {comments.map((comment, index) => (
-            <UserComment comment={comment} key={index} />
-          ))}
+        <div class="col-sm-4 card">
+          <UserAboutMe
+            profileUser={profileUser}
+            setProfileUser={setProfileUser}
+          />
         </div>
-      )}
+      </div>
     </div>
   );
 };

@@ -88,7 +88,7 @@ const getUserPosts = async (req, res) => {
 
   await setExistingSukos(req, posts);
 
-  return res.send({ posts });
+  return res.send({ posts, user });
 };
 
 const createPost = async (req, res) => {
@@ -151,11 +151,13 @@ const unsukoPost = async (req, res) => {
 const deletePost = async (req, res) => {
   const postId = req.params.id;
   const userId = req.user.id;
+  const isAdmin = req.user.isAdmin;
+
   const post = await Post.findOne({ _id: postId });
   if (!post) {
     return res.send("post not found");
   }
-  if (userId != post.author) {
+  if (userId != post.author && !isAdmin) {
     return res.send("you cant delete someone elses post");
   }
   await post.deleteOne();
@@ -165,13 +167,14 @@ const deletePost = async (req, res) => {
 
 const updatePost = async (req, res) => {
   const postId = req.params.id;
+  const isAdmin = req.user.isAdmin;
   const { title, content } = req.body;
   const userId = req.user.id;
   const post = await Post.findOne({ _id: postId });
   if (!post) {
     return res.send("post not found");
   }
-  if (post.author != userId) {
+  if (post.author != userId && !isAdmin) {
     return res.send("post isnt yours");
   }
   await post.updateOne({ title, content, edited: true });

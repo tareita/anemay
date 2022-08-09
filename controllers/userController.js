@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, aboutMe } = req.body;
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
       return res.send("user with same credentials exists");
@@ -14,6 +14,7 @@ const register = async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      aboutMe,
     });
     await user.save();
     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
@@ -33,7 +34,10 @@ const login = async (req, res) => {
   if (!isPasswordValid) {
     return res.send({ message: "wrong password" });
   }
-  const token = jwt.sign({ id: existingUser._id }, process.env.SECRET_KEY);
+  const token = jwt.sign(
+    { id: existingUser._id, isAdmin: existingUser.isAdmin },
+    process.env.SECRET_KEY
+  );
   const responseData = {
     username: existingUser.username,
     token,
@@ -42,4 +46,21 @@ const login = async (req, res) => {
   return res.send(responseData);
 };
 
-module.exports = { register, login };
+const updateAboutMe = async (req, res) => {
+  const { aboutMe } = req.body;
+  const { username } = req.params;
+  const user = await User.findOne({ username });
+  if (!user) {
+    return res.send({ message: "user not found" });
+  }
+  console.log(user.aboutMe);
+  if (user._id != req.user.id) {
+    return res.send({ message: "you're not allowed to do this" });
+  }
+  user.aboutMe = aboutMe;
+  await user.save();
+
+  return res.send({ user });
+};
+
+module.exports = { register, login, updateAboutMe };
