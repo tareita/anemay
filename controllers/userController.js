@@ -38,8 +38,10 @@ const login = async (req, res) => {
     { id: existingUser._id, isAdmin: existingUser.isAdmin },
     process.env.SECRET_KEY
   );
+
   const responseData = {
     username: existingUser.username,
+    isAdmin: existingUser.isAdmin,
     token,
     success: true,
   };

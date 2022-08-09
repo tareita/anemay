@@ -6,6 +6,7 @@ import Post from "./Post";
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const { topicName } = useParams();
+  const [topic, setTopic] = useState();
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -21,21 +22,30 @@ const Posts = () => {
       headers,
     });
     const data = await res.json();
-
+    setTopic(data.topic);
     setPosts(data.posts);
   };
   return (
     <div>
-      <Navbar />
-      <h1 className="my-3">{topicName}</h1>
-      <div className="mb-3">
-        <Link to="create-post">Make your own post here</Link>
-      </div>
-      <div>
-        {posts.map((post, index) => (
-          <Post post={post} key={index} />
-        ))}
-      </div>
+      {topic && (
+        <div>
+          <Navbar />
+          <h1 className="my-3">{topicName}</h1>
+
+          <div className="mb-3">
+            {topic.isLocked && !user.isAdmin ? (
+              <h4>This topic is locked.</h4>
+            ) : (
+              <Link to="create-post">Make your own post here</Link>
+            )}
+          </div>
+          <div>
+            {posts.map((post, index) => (
+              <Post post={post} key={index} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

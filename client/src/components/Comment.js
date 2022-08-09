@@ -87,7 +87,7 @@ const Comment = (props) => {
               />
             </div>
           )}
-          {user.username === author.username && (
+          {(user.username === author.username || user.isAdmin) && (
             <div className="my-2">
               <button
                 className="btn btn-danger"

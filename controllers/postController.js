@@ -17,7 +17,7 @@ const getPostsByTopic = async (req, res) => {
   const { topicName } = req.params;
   const topic = await Topic.findOne({ name: topicName });
   if (!topic) {
-    return res.send("topic not found");
+    return res.send({ message: "topic not found" });
   }
 
   const posts = await Post.find({ topic: topic._id })
@@ -28,7 +28,7 @@ const getPostsByTopic = async (req, res) => {
 
   await setExistingSukos(req, posts);
 
-  return res.send({ posts });
+  return res.send({ posts, topic });
 };
 
 const setExistingSukos = async (req, posts) => {
@@ -95,9 +95,13 @@ const createPost = async (req, res) => {
   const { title, content, topicName } = req.body;
   const topic = await Topic.findOne({ name: topicName });
   if (!topic) {
-    return res.send("topic not found");
+    return res.send({ message: "topic not found" });
   }
   const authorId = req.user.id;
+  const isAdmin = req.user.isAdmin;
+  if (topic.isLocked && !isAdmin) {
+    return res.send({ message: "you cant post here" });
+  }
   const post = new Post({
     title,
     content,
