@@ -45,7 +45,7 @@ const Posts = () => {
             {topic.isLocked && !user.isAdmin ? (
               <h4>This topic is locked.</h4>
             ) : (
-              <Link to={checkLoggedIn}>Make your own post here</Link>
+              <Link to={checkLoggedIn()}>Make your own post here</Link>
             )}
           </div>
           <div>

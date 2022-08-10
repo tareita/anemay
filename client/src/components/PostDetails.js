@@ -66,7 +66,7 @@ const PostDetails = () => {
           </div>
           <div className="card my-3">
             <div className="card-body">
-              {(user.username === author.username || user.isAdmin) && (
+              {user && (user.username === author.username || user.isAdmin) && (
                 <div>
                   <button
                     className="btn btn-danger"
