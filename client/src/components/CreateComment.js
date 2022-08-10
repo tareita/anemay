@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const CreateComment = (props) => {
   const { post, comments, setComments, repliedTo, setReplying } = props;
@@ -26,7 +27,7 @@ const CreateComment = (props) => {
     setFormData({ ...formData, content: "" });
   };
 
-  return (
+  return user ? (
     <div className="card">
       <div className="card-body">
         <form>
@@ -52,6 +53,10 @@ const CreateComment = (props) => {
         </form>
       </div>
     </div>
+  ) : (
+    <h5>
+      <Link to="/login">Login</Link> to create a comment
+    </h5>
   );
 };
 
