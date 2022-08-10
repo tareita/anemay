@@ -1,22 +1,28 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Suko = (props) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [sukoCount, setSukoCount] = useState(props.sukoCount);
   const [sukod, setSukod] = useState(props.sukod);
+  const navigate = useNavigate();
 
   const sukoPost = async () => {
-    if (!props.sukod) {
-      setSukoCount(props.sukoCount + 1);
-    } else {
-      setSukoCount(props.sukoCount);
-    }
-    setSukod(true);
+    if (user) {
+      if (!props.sukod) {
+        setSukoCount(props.sukoCount + 1);
+      } else {
+        setSukoCount(props.sukoCount);
+      }
+      setSukod(true);
 
-    await fetch("http://localhost:4000/posts/suko/" + props.postId, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", token: user.token },
-    });
+      await fetch("http://localhost:4000/posts/suko/" + props.postId, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", token: user.token },
+      });
+    } else {
+      navigate("/login");
+    }
   };
 
   const unSukoPost = async () => {
