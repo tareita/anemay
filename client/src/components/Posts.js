@@ -39,19 +39,21 @@ const Posts = () => {
       {topic && (
         <div>
           <Navbar />
-          <h1 className="my-3">{topicName}</h1>
+          <div className="container">
+            <h1 className="my-3">{topicName}</h1>
 
-          <div className="mb-3">
-            {topic.isLocked && !user.isAdmin ? (
-              <h4>This topic is locked.</h4>
-            ) : (
-              <Link to={checkLoggedIn()}>Make your own post here</Link>
-            )}
-          </div>
-          <div>
-            {posts.map((post, index) => (
-              <Post post={post} key={index} />
-            ))}
+            <div className="mb-3">
+              {topic.isLocked && !user.isAdmin ? (
+                <h4>This topic is locked.</h4>
+              ) : (
+                <Link to={checkLoggedIn()}>Make your own post here</Link>
+              )}
+            </div>
+            <div>
+              {posts.map((post, index) => (
+                <Post post={post} key={index} />
+              ))}
+            </div>
           </div>
         </div>
       )}

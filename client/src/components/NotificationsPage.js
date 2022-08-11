@@ -24,10 +24,12 @@ const NotificationsPage = () => {
     notifications && (
       <div>
         <Navbar />
-        <h3 className="my-3">Notifications</h3>
-        {notifications.map((notification, index) => (
-          <NotificationCard notification={notification} key={index} />
-        ))}
+        <div className="container">
+          <h3 className="my-3">Notifications</h3>
+          {notifications.map((notification, index) => (
+            <NotificationCard notification={notification} key={index} />
+          ))}
+        </div>
       </div>
     )
   );

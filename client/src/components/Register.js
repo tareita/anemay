@@ -32,50 +32,52 @@ const Register = () => {
   return (
     <div>
       <Navbar />
-      <h2 className="my-3">Register</h2>
-      <form>
-        <div className="my-3">
-          <label className="form-label">Email address</label>
-          <input
-            value={formData.email}
-            type="email"
-            className="form-control"
-            name="email"
-            onChange={handleFormDataChange}
-          />
-          <div className="form-text">
-            We'll never share your email with anyone else.
+      <div className="container">
+        <h2 className="my-3">Register</h2>
+        <form>
+          <div className="my-3">
+            <label className="form-label">Email address</label>
+            <input
+              value={formData.email}
+              type="email"
+              className="form-control"
+              name="email"
+              onChange={handleFormDataChange}
+            />
+            <div className="form-text">
+              We'll never share your email with anyone else.
+            </div>
           </div>
-        </div>
-        <div className=" mb-3">
-          <label className="form-label">Username</label>
-          <input
-            value={formData.username}
-            type="text"
-            className="form-control"
-            name="username"
-            onChange={handleFormDataChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            value={formData.password}
-            type="password"
-            className="form-control"
-            name="password"
-            onChange={handleFormDataChange}
-          />
-        </div>
-        <ErrorAlert error={error} />
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmitClick}
-        >
-          Submit
-        </button>
-      </form>
+          <div className=" mb-3">
+            <label className="form-label">Username</label>
+            <input
+              value={formData.username}
+              type="text"
+              className="form-control"
+              name="username"
+              onChange={handleFormDataChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              value={formData.password}
+              type="password"
+              className="form-control"
+              name="password"
+              onChange={handleFormDataChange}
+            />
+          </div>
+          <ErrorAlert error={error} />
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleSubmitClick}
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

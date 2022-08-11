@@ -40,51 +40,53 @@ const UserProfile = () => {
   return (
     <div>
       <Navbar />
-      <h2>{username}'s profile </h2>
-      <ul className="nav nav-tabs mb-4">
-        <li className="nav-item">
-          <a
-            className={`nav-link ${tab == "posts" && "active"}`}
-            onClick={() => {
-              setTab("posts");
-            }}
-          >
-            Posts
-          </a>
-        </li>
-        <li className="nav-item">
-          <a
-            className={`nav-link ${tab == "comments" && "active"}`}
-            onClick={() => {
-              setTab("comments");
-            }}
-          >
-            Comments
-          </a>
-        </li>
-      </ul>
-      <div className="row">
-        <div className="col-sm-8 mr-10">
-          {tab == "posts" && (
-            <div>
-              {posts.map((post, index) => (
-                <Post post={post} key={index} />
-              ))}
-            </div>
-          )}
-          {tab == "comments" && (
-            <div>
-              {comments.map((comment, index) => (
-                <UserComment comment={comment} key={index} />
-              ))}
-            </div>
-          )}
-        </div>
-        <div class="col-sm-4 card">
-          <UserAboutMe
-            profileUser={profileUser}
-            setProfileUser={setProfileUser}
-          />
+      <div className="container">
+        <h2>{username}'s profile </h2>
+        <ul className="nav nav-tabs mb-4">
+          <li className="nav-item">
+            <a
+              className={`nav-link ${tab == "posts" && "active"}`}
+              onClick={() => {
+                setTab("posts");
+              }}
+            >
+              Posts
+            </a>
+          </li>
+          <li className="nav-item">
+            <a
+              className={`nav-link ${tab == "comments" && "active"}`}
+              onClick={() => {
+                setTab("comments");
+              }}
+            >
+              Comments
+            </a>
+          </li>
+        </ul>
+        <div className="row">
+          <div className="col-sm-8 mr-10">
+            {tab == "posts" && (
+              <div>
+                {posts.map((post, index) => (
+                  <Post post={post} key={index} />
+                ))}
+              </div>
+            )}
+            {tab == "comments" && (
+              <div>
+                {comments.map((comment, index) => (
+                  <UserComment comment={comment} key={index} />
+                ))}
+              </div>
+            )}
+          </div>
+          <div class="col-sm-4 card">
+            <UserAboutMe
+              profileUser={profileUser}
+              setProfileUser={setProfileUser}
+            />
+          </div>
         </div>
       </div>
     </div>

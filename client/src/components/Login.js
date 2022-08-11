@@ -35,37 +35,39 @@ const Login = () => {
   return (
     <div>
       <Navbar />
-      <h2 className="my-3">Login</h2>
-      <form>
-        <div className=" mb-3">
-          <label className="form-label">Username</label>
-          <input
-            type="text"
-            className="form-control"
-            value={formData.username}
-            name="username"
-            onChange={handleFormDataChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            value={formData.password}
-            name="password"
-            onChange={handleFormDataChange}
-          />
-        </div>
-        <ErrorAlert error={error} />
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmitClick}
-        >
-          Submit
-        </button>
-      </form>
+      <div className="container">
+        <h2 className="my-3">Login</h2>
+        <form>
+          <div className=" mb-3">
+            <label className="form-label">Username</label>
+            <input
+              type="text"
+              className="form-control"
+              value={formData.username}
+              name="username"
+              onChange={handleFormDataChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              value={formData.password}
+              name="password"
+              onChange={handleFormDataChange}
+            />
+          </div>
+          <ErrorAlert error={error} />
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleSubmitClick}
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

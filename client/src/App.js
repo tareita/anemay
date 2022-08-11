@@ -10,7 +10,7 @@ import NotificationsPage from "./components/NotificationsPage";
 
 function App() {
   return (
-    <div className="App container">
+    <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
