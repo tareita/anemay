@@ -6,6 +6,7 @@ import Posts from "./components/Posts";
 import Register from "./components/Register";
 import CreatePost from "./components/CreatePost";
 import UserProfile from "./components/UserProfile";
+import NotificationsPage from "./components/NotificationsPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             element={<CreatePost />}
           />
           <Route path="/users/:username" element={<UserProfile />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -3,6 +3,7 @@ const Comment = require("../models/Comment");
 const jwt = require("jsonwebtoken");
 const Topic = require("../models/Topic");
 const User = require("../models/User");
+const Notification = require("../models/Notification");
 const PostSuko = require("../models/PostSuko");
 
 const getAllPosts = async (req, res) => {
@@ -153,6 +154,12 @@ const unsukoPost = async (req, res) => {
   if (!existingSuko) {
     return res.send({ message: "like doesnt exist" });
   }
+
+  const existingNotification = await Notification.deleteOne({
+    post: postId,
+    user: userId,
+    notificationType: "postSuko",
+  });
   await existingSuko.deleteOne();
   const postSukos = await PostSuko.find({ postId });
   post.sukoCount = postSukos.length;

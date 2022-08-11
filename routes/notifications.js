@@ -5,4 +5,10 @@ const auth = require("../middleware/auth");
 
 router.get("/", auth.verifyToken, notificationController.getNotifications);
 
+router.get(
+  "/count",
+  auth.verifyToken,
+  notificationController.getNotificationCount
+);
+
 module.exports = router;
