@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const notificationSchema = new mongoose.schema({
+const notificationSchema = new mongoose.Schema({
   notificationType: {
     type: String,
     enum: ["postSuko", "postComment", "commentReply"],

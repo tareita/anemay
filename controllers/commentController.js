@@ -21,17 +21,49 @@ const getUserComments = async (req, res) => {
 const createComment = async (req, res) => {
   const { postId, content, repliedTo } = req.body;
   const { id } = req.user;
+
   const comment = new Comment({
     content,
     author: id,
     post: postId,
     repliedTo,
   });
+
   await comment.populate("author");
+
   await comment.populate({
     path: "repliedTo",
     populate: { path: "author", model: "User" },
   });
+
+  await comment.populate({
+    path: "post",
+    populate: { path: "topic", model: "Topic" },
+  });
+
+  await comment.populate({
+    path: "post",
+    populate: { path: "author", model: "User" },
+  });
+
+  if (repliedTo) {
+    await Notification.create({
+      notificationType: "commentReply",
+      user: comment.repliedTo.author._id,
+      post: comment.post._id,
+      topic: comment.post.topic._id,
+      notifier: comment.author._id,
+    });
+  } else {
+    await Notification.create({
+      notificationType: "postComment",
+      user: comment.post.author._id,
+      post: comment.post._id,
+      topic: comment.post.topic._id,
+      notifier: comment.author._id,
+    });
+  }
+
   await comment.save();
 
   return res.send({ comment });

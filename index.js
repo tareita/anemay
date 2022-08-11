@@ -8,6 +8,7 @@ const { Schema } = mongoose;
 const posts = require("./routes/posts");
 const users = require("./routes/users");
 const comments = require("./routes/comments");
+const notifications = require("./routes/notifications");
 
 app.listen(4000, () => {
   console.log("server started");
@@ -26,3 +27,4 @@ app.use(cors());
 app.use("/posts", posts);
 app.use("/users", users);
 app.use("/comments", comments);
+app.use("/notifications", notifications);

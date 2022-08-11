@@ -120,6 +120,7 @@ const sukoPost = async (req, res) => {
   if (!post) {
     return res.send({ message: "post doesnt exist" });
   }
+  const user = await User.findById(userId);
   const existingSuko = await PostSuko.findOne({ userId, postId });
   if (existingSuko) {
     return res.send({ message: "you already liked this post" });
@@ -127,6 +128,13 @@ const sukoPost = async (req, res) => {
   await PostSuko.create({
     postId,
     userId,
+  });
+  await Notification.create({
+    notificationType: "postSuko",
+    user: post.author._id,
+    post: post._id,
+    topic: post.topic._id,
+    notifier: user._id,
   });
   const postSukos = await PostSuko.find({ postId });
   post.sukoCount = postSukos.length;
