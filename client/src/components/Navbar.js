@@ -20,6 +20,11 @@ export const Navbar = () => {
             {user ? (
               <div className="navbar-nav">
                 <div className="mx-2">
+                  <Link to={"/users/" + user.username + "/notifications"}>
+                    Notifications
+                  </Link>
+                </div>
+                <div className="mx-2">
                   <Link to={"/users/" + user.username}>{user.username}</Link>
                 </div>
                 <button className="btn btn-primary" onClick={handleLogout}>

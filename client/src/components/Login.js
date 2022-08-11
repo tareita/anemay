@@ -1,14 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorAlert from "./ErrorAlert";
 import { Navbar } from "./Navbar";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
+  const [error, setError] = useState();
   const navigate = useNavigate();
+
   const handleFormDataChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleSubmitClick = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:4000/users/login/", {
@@ -23,8 +27,11 @@ const Login = () => {
     if (data.success) {
       localStorage.setItem("user", JSON.stringify(data));
       navigate("/");
+    } else {
+      setError(data.message);
     }
   };
+
   return (
     <div>
       <Navbar />
@@ -50,6 +57,7 @@ const Login = () => {
             onChange={handleFormDataChange}
           />
         </div>
+        <ErrorAlert error={error} />
         <button
           type="submit"
           className="btn btn-primary"

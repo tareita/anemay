@@ -2,13 +2,17 @@ import React from "react";
 import { useState } from "react";
 import { Navbar } from "./Navbar";
 import { useNavigate } from "react-router-dom";
+import ErrorAlert from "./ErrorAlert";
 
 const Register = () => {
   const [formData, setFormData] = useState({});
+  const [error, setError] = useState();
   const navigate = useNavigate();
+
   const handleFormDataChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleSubmitClick = async (e) => {
     e.preventDefault();
     const res = await fetch("http://localhost:4000/users/register", {
@@ -17,9 +21,14 @@ const Register = () => {
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
-    localStorage.setItem("user", JSON.stringify(data));
-    navigate("/");
+    if (data.success) {
+      localStorage.setItem("user", JSON.stringify(data));
+      navigate("/");
+    } else {
+      setError(data.message);
+    }
   };
+
   return (
     <div>
       <Navbar />
@@ -58,6 +67,7 @@ const Register = () => {
             onChange={handleFormDataChange}
           />
         </div>
+        <ErrorAlert error={error} />
         <button
           type="submit"
           className="btn btn-primary"

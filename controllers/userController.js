@@ -5,9 +5,13 @@ const bcrypt = require("bcrypt");
 const register = async (req, res) => {
   try {
     const { username, email, password, aboutMe } = req.body;
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-    if (existingUser) {
-      return res.send("user with same credentials exists");
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      return res.send({ message: "User with same username exists" });
+    }
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return res.send({ message: "User with same email exists" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
@@ -18,7 +22,7 @@ const register = async (req, res) => {
     });
     await user.save();
     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
-    return res.send({ username: user.username, token });
+    return res.send({ username: user.username, token, success: true });
   } catch (err) {
     console.log(err.message);
   }
@@ -28,11 +32,11 @@ const login = async (req, res) => {
   const { username, password } = req.body;
   const existingUser = await User.findOne({ username }).select("+password");
   if (!existingUser) {
-    return res.send({ message: "user does not exist" });
+    return res.send({ message: "Incorrect username or password." });
   }
   const isPasswordValid = await bcrypt.compare(password, existingUser.password);
   if (!isPasswordValid) {
-    return res.send({ message: "wrong password" });
+    return res.send({ message: "Incorrect username or password." });
   }
   const token = jwt.sign(
     { id: existingUser._id, isAdmin: existingUser.isAdmin },
@@ -45,6 +49,7 @@ const login = async (req, res) => {
     token,
     success: true,
   };
+
   return res.send(responseData);
 };
 
@@ -61,7 +66,6 @@ const updateAboutMe = async (req, res) => {
   }
   user.aboutMe = aboutMe;
   await user.save();
-
   return res.send({ user });
 };
 
