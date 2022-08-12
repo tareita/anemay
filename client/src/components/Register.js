@@ -48,7 +48,13 @@ const Register = () => {
             </h5>
             <form>
               <div className="mb-3">
-                <label className="form-label">Email address</label>
+                <label className="form-label">
+                  <i
+                    class="fa-regular fa-envelope"
+                    style={{ color: "#5e5e5e" }}
+                  ></i>{" "}
+                  Email address
+                </label>
                 <input
                   value={formData.email}
                   type="email"
@@ -61,7 +67,14 @@ const Register = () => {
                 </div>
               </div>
               <div className=" mb-3">
-                <label className="form-label">Username</label>
+                <label className="form-label">
+                  {" "}
+                  <i
+                    className="fa-regular fa-circle-user"
+                    style={{ color: "#5e5e5e" }}
+                  ></i>{" "}
+                  Username
+                </label>
                 <input
                   value={formData.username}
                   type="text"
@@ -71,7 +84,10 @@ const Register = () => {
                 />
               </div>
               <div className="mb-3">
-                <label className="form-label">Password</label>
+                <label className="form-label">
+                  <i class="fa-solid fa-lock" style={{ color: "#5e5e5e" }}></i>{" "}
+                  Password
+                </label>
                 <input
                   value={formData.password}
                   type="password"

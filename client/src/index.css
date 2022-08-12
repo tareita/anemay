@@ -69,8 +69,12 @@ a:hover {
     background-color: var(--bs-ternary);
 }
 
-.nav .register a:hover {
+.nav .register a{
     color: var(--bs-secondary);
+}
+
+.nav .register a:hover {
+    color: var(--bs-white);
 }
 .nav .login {
     border: 1px solid var(--bs-white);
