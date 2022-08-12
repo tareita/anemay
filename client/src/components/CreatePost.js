@@ -29,38 +29,40 @@ const CreatePost = () => {
   return (
     <div>
       <Navbar />
-      <h3 className="my-4">Create a post:</h3>
-      <form>
-        <div className="mb-3">
-          <label className="form-label">Title</label>
-          <input
-            className="form-control"
-            value={formData.title}
-            onChange={handleFormDataChange}
-            name="title"
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Content</label>
-          <textarea
-            rows={8}
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            value={formData.content}
-            onChange={handleFormDataChange}
-            name="content"
-          />
-        </div>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmitClick}
-          disabled={!formData.content}
-        >
-          Submit
-        </button>
-      </form>
+      <div className="container">
+        <h3 className="my-4">Create a post:</h3>
+        <form>
+          <div className="mb-3">
+            <label className="form-label">Title</label>
+            <input
+              className="form-control"
+              value={formData.title}
+              onChange={handleFormDataChange}
+              name="title"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Content</label>
+            <textarea
+              rows={8}
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              value={formData.content}
+              onChange={handleFormDataChange}
+              name="content"
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleSubmitClick}
+            disabled={!formData.content}
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -36,37 +36,55 @@ const Login = () => {
     <div>
       <Navbar />
       <div className="container">
-        <h2 className="my-3">Login</h2>
-        <form>
-          <div className=" mb-3">
-            <label className="form-label">Username</label>
-            <input
-              type="text"
-              className="form-control"
-              value={formData.username}
-              name="username"
-              onChange={handleFormDataChange}
-            />
+        <div className="row">
+          <div className="col-sm-6"></div>
+          <div className="col-sm-6 login-box">
+            <h1 className="mt-3 mb-2">Login</h1>
+            <h5 className=" mb-4" style={{ color: "#5e5e5e" }}>
+              {" "}
+              Welcome back to Anemay!{" "}
+            </h5>
+            <form>
+              <div className="mb-3">
+                <label className="form-label">
+                  <i
+                    className="fa-regular fa-circle-user"
+                    style={{ color: "#5e5e5e" }}
+                  ></i>{" "}
+                  Username
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={formData.username}
+                  name="username"
+                  onChange={handleFormDataChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">
+                  <i class="fa-solid fa-lock" style={{ color: "#5e5e5e" }}></i>{" "}
+                  Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  value={formData.password}
+                  name="password"
+                  onChange={handleFormDataChange}
+                />
+              </div>
+              <ErrorAlert error={error} />
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleSubmitClick}
+              >
+                Submit
+              </button>
+            </form>
           </div>
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              value={formData.password}
-              name="password"
-              onChange={handleFormDataChange}
-            />
-          </div>
-          <ErrorAlert error={error} />
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={handleSubmitClick}
-          >
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

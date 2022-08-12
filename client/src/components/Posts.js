@@ -30,7 +30,7 @@ const Posts = () => {
     if (!user) {
       return "/login";
     } else {
-      return "/create-post";
+      return "/posts/" + topicName + "/create-post";
     }
   };
 

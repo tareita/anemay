@@ -19,6 +19,10 @@ a {
     color: var(--bs-white);
 }
 
+a:hover {
+    color: var(--bs-ternary);
+}
+
 .list-group-item {
     background-color: var(--bs-secondary);
     padding: 30px;
@@ -54,7 +58,35 @@ a {
     border-left: 5px solid grey
 }
 
+.btn {
+    background-color: var(--bs-ternary);
+}
 
-.navbar {
-    background-color: var(--bs-primary);
+.nav .register {
+    border: 1px solid var(--bs-secondary);
+    padding: 6px;
+    border-radius: 5px;
+    background-color: var(--bs-ternary);
+}
+
+.nav .register a:hover {
+    color: var(--bs-secondary);
+}
+.nav .login {
+    border: 1px solid var(--bs-white);
+        padding: 5px;
+        border-radius: 5px;
+}
+
+
+.login-box {
+    color: var(--bs-ternary);
+}
+
+.login-box button {
+    color:var(--bs-primary);
+}
+
+.register-container {
+    margin-top: 75px;
 }

@@ -32,7 +32,7 @@ const CreateComment = (props) => {
       <div className="card-body">
         <form>
           <div className="mb-3">
-            <label className="form-label">Content</label>
+            <label className="form-label">Create a comment:</label>
             <textarea
               rows={3}
               className="form-control"

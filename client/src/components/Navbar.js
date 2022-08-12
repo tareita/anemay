@@ -26,37 +26,52 @@ export const Navbar = () => {
   };
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg">
+    <div style={{ backgroundColor: "var(--bs-secondary)" }}>
+      <nav className="navbar navbar-expand-lg mx-3 ">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            <Link to="/">Anemay</Link>
+            <Link to="/">
+              <img
+                src="https://see.fontimg.com/api/renderfont4/YOn4/eyJyIjoiZnMiLCJoIjo4OSwidyI6MTI1MCwiZnMiOjcxLCJmZ2MiOiIjMTJDNkQ3IiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/YW5lbWF5/ninja-naruto.png"
+                style={{ height: "40px" }}
+              />
+            </Link>
           </a>
           <div>
             {user ? (
-              <div className="navbar-nav">
+              <div className="navbar-nav d-flex align-items-center">
                 <div className="mx-2">
                   <Link to={"/notifications"}>
-                    Notifications{" "}
+                    <i class="fa-regular fa-bell"></i> Notifications{" "}
                     {notificationCount !== 0 && (
                       <span>{"(" + notificationCount + ")"}</span>
                     )}
                   </Link>
                 </div>
-                <div className="mx-2">
-                  <Link to={"/users/" + user.username}>{user.username}</Link>
+                <div className="mx-3">
+                  <Link to={"/users/" + user.username}>
+                    <i class="fa-regular fa-user" /> {user.username}
+                  </Link>
                 </div>
-                <button className="btn btn-primary" onClick={handleLogout}>
-                  Logout
+                <button className="btn" onClick={handleLogout}>
+                  Logout <i class="fa-solid fa-right-from-bracket"></i>
                 </button>
               </div>
             ) : (
-              <div className="navbar-nav">
+              <div className="navbar-nav nav">
                 <div className="nav-link active">
-                  <Link to="/register">Register</Link>
+                  <div className="register">
+                    <Link to="/register">
+                      <i className="fa-solid fa-right-to-bracket" /> Register
+                    </Link>{" "}
+                  </div>
                 </div>
-                <div className="nav-link active">
-                  <Link to="/login">Login</Link>
+                <div className="nav-link active mx-3">
+                  <div className="login">
+                    <Link to="/login">
+                      <i className="fa-regular fa-user" /> Login
+                    </Link>
+                  </div>
                 </div>
               </div>
             )}

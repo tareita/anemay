@@ -32,51 +32,65 @@ const Register = () => {
   return (
     <div>
       <Navbar />
-      <div className="container">
-        <h2 className="my-3">Register</h2>
-        <form>
-          <div className="my-3">
-            <label className="form-label">Email address</label>
-            <input
-              value={formData.email}
-              type="email"
-              className="form-control"
-              name="email"
-              onChange={handleFormDataChange}
-            />
-            <div className="form-text">
-              We'll never share your email with anyone else.
-            </div>
-          </div>
-          <div className=" mb-3">
-            <label className="form-label">Username</label>
-            <input
-              value={formData.username}
-              type="text"
-              className="form-control"
-              name="username"
-              onChange={handleFormDataChange}
+      <div className="container register-container">
+        <div className="row">
+          <div className="col-sm-6">
+            <img
+              src="https://o.remove.bg/downloads/3e44350d-54cb-4a9d-b187-1fca9b59b111/image-removebg-preview.png"
+              style={{ width: "90%" }}
             />
           </div>
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input
-              value={formData.password}
-              type="password"
-              className="form-control"
-              name="password"
-              onChange={handleFormDataChange}
-            />
+          <div className="col-sm-6 login-box">
+            <h1 className="mt-3 mb-2">Register</h1>
+            <h5 className=" mb-4" style={{ color: "#5e5e5e" }}>
+              {" "}
+              Welcome to Anemay! Register to get started.{" "}
+            </h5>
+            <form>
+              <div className="mb-3">
+                <label className="form-label">Email address</label>
+                <input
+                  value={formData.email}
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  onChange={handleFormDataChange}
+                />
+                <div className="form-text" style={{ color: "#5e5e5e" }}>
+                  We'll never share your email with anyone else.
+                </div>
+              </div>
+              <div className=" mb-3">
+                <label className="form-label">Username</label>
+                <input
+                  value={formData.username}
+                  type="text"
+                  className="form-control"
+                  name="username"
+                  onChange={handleFormDataChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Password</label>
+                <input
+                  value={formData.password}
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  onChange={handleFormDataChange}
+                />
+              </div>
+              <ErrorAlert error={error} />
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleSubmitClick}
+              >
+                Submit
+              </button>
+            </form>
           </div>
-          <ErrorAlert error={error} />
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={handleSubmitClick}
-          >
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );
