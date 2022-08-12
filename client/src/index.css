@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+:root {
+    --bs-primary: #171717;
+    --bs-secondary: #1f1f1f;
+    --bs-ternary: rgb(73, 220, 250);
+    --bs-white: #ffffff;
+}
+
+
+body {
+    background-color: var(--bs-primary);
+    font-family: 'Source Sans Pro', sans-serif;
+    color: var(--bs-white);
+ }
+    
+
+a {
+    text-decoration: none;
+    color: var(--bs-white);
+}
+
+.list-group-item {
+    background-color: var(--bs-secondary);
+    padding: 30px;
+    color: var(--bs-white);
+    margin-left: 5px;
+}
+
+.Updates {
+    border-left: 5px solid rgb(255, 57, 57);
+}
+
+.Anime {
+    border-left: 5px solid rgb(79, 128, 233)
+}
+
+.Manga {
+    border-left: 5px solid rgb(255, 153, 0)
+}
+
+.Movies {
+    border-left: 5px solid rgb(250, 100, 137)
+}
+
+.Games {
+    border-left: 5px solid rgb(69, 225, 58)
+}
+
+.Music {
+    border-left: 5px solid rgb(167, 84, 167)
+}
+
+.Off-topic {
+    border-left: 5px solid grey
+}
+
+
+.navbar {
+    background-color: var(--bs-primary);
+}

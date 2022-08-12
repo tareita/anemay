@@ -13,8 +13,7 @@ const Topics = () => {
   ];
   return (
     <div>
-      <h3 className="my-3">Topics</h3>
-      <ul className="list-group list-group-flush">
+      <ul className="list-group">
         {topics.map((topic) => (
           <Topic topic={topic} />
         ))}
