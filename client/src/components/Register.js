@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Navbar } from "./Navbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ErrorAlert from "./ErrorAlert";
 
 const Register = () => {
@@ -43,16 +43,17 @@ const Register = () => {
           <div className="col-sm-6 login-box">
             <h1 className="mt-3 mb-2">Register</h1>
             <h5 className=" mb-4" style={{ color: "#5e5e5e" }}>
-              {" "}
+              {"  "}
               Welcome to Anemay! Register to get started.{" "}
             </h5>
             <form>
               <div className="mb-3">
                 <label className="form-label">
                   <i
-                    class="fa-regular fa-envelope"
+                    class="fa-regular fa-envelope mx-1"
                     style={{ color: "#5e5e5e" }}
-                  ></i>{" "}
+                  ></i>
+                  {"  "}
                   Email address
                 </label>
                 <input
@@ -70,7 +71,7 @@ const Register = () => {
                 <label className="form-label">
                   {" "}
                   <i
-                    className="fa-regular fa-circle-user"
+                    className="fa-regular fa-circle-user mx-1"
                     style={{ color: "#5e5e5e" }}
                   ></i>{" "}
                   Username
@@ -85,7 +86,10 @@ const Register = () => {
               </div>
               <div className="mb-3">
                 <label className="form-label">
-                  <i class="fa-solid fa-lock" style={{ color: "#5e5e5e" }}></i>{" "}
+                  <i
+                    class="fa-solid fa-lock mx-1"
+                    style={{ color: "#5e5e5e" }}
+                  ></i>{" "}
                   Password
                 </label>
                 <input
@@ -104,6 +108,10 @@ const Register = () => {
               >
                 Submit
               </button>
+              <h6 className="mt-2" style={{ color: "#5e5e5e" }}>
+                {"  "}
+                Already have an account? <Link to="/login">Login</Link>{" "}
+              </h6>
             </form>
           </div>
         </div>

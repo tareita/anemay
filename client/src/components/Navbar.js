@@ -59,14 +59,14 @@ export const Navbar = () => {
               </div>
             ) : (
               <div className="navbar-nav nav">
-                <div className="nav-link active">
+                <div className="nav-link active mx-2">
                   <div className="register">
                     <Link to="/register">
                       <i className="fa-solid fa-right-to-bracket" /> Register
                     </Link>{" "}
                   </div>
                 </div>
-                <div className="nav-link active mx-3">
+                <div className="nav-link active">
                   <div className="login">
                     <Link to="/login">
                       <i className="fa-regular fa-user" /> Login
