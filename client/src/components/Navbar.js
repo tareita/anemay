@@ -9,7 +9,6 @@ export const Navbar = () => {
 
   useEffect(() => {
     fetchNotificationCount();
-    console.log(notificationCount);
   }, []);
 
   const handleLogout = () => {
@@ -27,7 +26,7 @@ export const Navbar = () => {
 
   return (
     <div style={{ backgroundColor: "var(--bs-secondary)" }}>
-      <nav className="navbar navbar-expand-lg mx-3 ">
+      <nav className="navbar navbar-expand-lg mx-3 shadow">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             <Link to="/">

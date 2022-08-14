@@ -4,14 +4,14 @@ const Notification = require("../models/Notification");
 const getNotifications = async (req, res) => {
   const user = req.user;
 
-  await Notification.updateMany({ user: user.id }, { read: true });
-
   const notifications = await Notification.find({ user: user.id })
     .populate("user")
     .populate("post")
     .populate("topic")
     .populate("notifier")
     .sort("-createdAt");
+
+  await Notification.updateMany({ user: user.id }, { read: true });
 
   return res.send({ notifications });
 };

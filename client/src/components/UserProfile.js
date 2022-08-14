@@ -41,31 +41,38 @@ const UserProfile = () => {
     <div>
       <Navbar />
       <div className="container">
-        <h2>{username}'s profile </h2>
-        <ul className="nav nav-tabs mb-4">
-          <li className="nav-item">
-            <a
-              className={`nav-link ${tab == "posts" && "active"}`}
-              onClick={() => {
-                setTab("posts");
-              }}
-            >
-              Posts
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className={`nav-link ${tab == "comments" && "active"}`}
-              onClick={() => {
-                setTab("comments");
-              }}
-            >
-              Comments
-            </a>
-          </li>
-        </ul>
+        <h2 className="my-4">{username}'s profile </h2>
         <div className="row">
-          <div className="col-sm-8 mr-10">
+          <div className="col-sm-4 card" style={{ maxHeight: "350px" }}>
+            <UserAboutMe
+              profileUser={profileUser}
+              setProfileUser={setProfileUser}
+            />
+          </div>
+          <div className="col-sm-8 mx-5" style={{ maxWidth: "700px" }}>
+            <ul className="nav nav-tabs mb-4">
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${tab == "posts" && "active"}`}
+                  onClick={() => {
+                    setTab("posts");
+                  }}
+                >
+                  Posts
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${tab == "comments" && "active"}`}
+                  onClick={() => {
+                    setTab("comments");
+                  }}
+                >
+                  Comments
+                </a>
+              </li>
+            </ul>
+
             {tab == "posts" && (
               <div>
                 {posts.map((post, index) => (
@@ -80,12 +87,6 @@ const UserProfile = () => {
                 ))}
               </div>
             )}
-          </div>
-          <div class="col-sm-4 card">
-            <UserAboutMe
-              profileUser={profileUser}
-              setProfileUser={setProfileUser}
-            />
           </div>
         </div>
       </div>

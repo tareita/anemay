@@ -40,13 +40,22 @@ const Posts = () => {
         <div>
           <Navbar />
           <div className="container">
-            <h1 className="my-3">{topicName}</h1>
-
-            <div className="mb-3">
+            <div className="back-to-posts my-2">
+              <Link to={"/"}>
+                <i class="fa-solid fa-arrow-left"></i> Back to topics
+              </Link>
+            </div>
+            <h1 className="mb-4 topic-title">{topicName} </h1>
+            <div className="mb-4">
               {topic.isLocked && !user.isAdmin ? (
                 <h4>This topic is locked.</h4>
               ) : (
-                <Link to={checkLoggedIn()}>Make your own post here</Link>
+                <h4>
+                  <Link to={checkLoggedIn()}>
+                    <i class="fa-regular fa-pen-to-square"></i> Make your own
+                    post
+                  </Link>
+                </h4>
               )}
             </div>
             <div>

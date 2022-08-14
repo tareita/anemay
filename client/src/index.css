@@ -4,6 +4,7 @@
     --bs-secondary: #1f1f1f;
     --bs-ternary: rgb(73, 220, 250);
     --bs-white: #ffffff;
+    --bs-muted-white: #5e5e5e;
 }
 
 
@@ -100,4 +101,73 @@ a:hover {
 
 .register-container {
     margin-top: 75px;
+}
+
+.notif-container .title {
+    border-bottom: 1px solid var(--bs-white);
+    padding-bottom: 10px;
+    width: 225px;
+}
+
+.topic-title {
+    color: var(--bs-ternary);
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--bs-ternary);
+    padding: 5px;
+}
+
+
+.crop-text-1 {
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.un-suko {
+    background: url(https://o.remove.bg/downloads/1b0f787e-335a-4bf2-bdac-b20ed14e0424/image-removebg-preview.png) no-repeat;
+    cursor: pointer;
+    border: none;
+    background-size: 75px;
+    width: 75px;
+    height: 75px;
+}
+
+.suko {
+background: url(https://o.remove.bg/downloads/f6b9ab6a-2a20-487c-ba25-6183a42a8755/anime-clipart-thumbs-up-konosuba-kazuma-thumbs-u-11562893319umxuw395qa-removebg-preview.png) no-repeat;    cursor: pointer;
+    border: none;
+    background-size: 75px;
+    width: 75px;
+    height: 75px;
+}
+
+.post-card a {
+    color: var(--bs-muted-white);
+    border-bottom: 1px solid var(--bs-muted-white);
+}
+
+.post-card a:hover {
+    color: var(--bs-white);
+}
+
+.post-content {
+    font-size:large;
+}
+
+.view-post a{
+    color: var(--bs-ternary);
+}
+
+.view-post a:hover {
+    color: var(--bs-white);
+}
+
+.back-to-posts a{
+    color: var(--bs-muted-white);
+    font-size: 25px;
+}
+
+.back-to-posts a:hover {
+    color: var(--bs-ternary);
 }

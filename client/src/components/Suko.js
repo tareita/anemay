@@ -42,18 +42,23 @@ const Suko = (props) => {
   return (
     <div>
       {sukod ? (
-        <div>
-          <button className="btn btn-danger mx-3" onClick={unSukoPost}>
-            Suko
-          </button>
-          {sukoCount}
+        <div className="d-flex flex-column align-items-center">
+          <input
+            className="un-suko"
+            type="button"
+            value=""
+            onClick={unSukoPost}
+          />
+          <h2 className="my-2" style={{ color: "var(--bs-ternary)" }}>
+            {sukoCount}
+          </h2>
         </div>
       ) : (
-        <div>
-          <button className="btn btn-success mx-3" onClick={sukoPost}>
-            Suko
-          </button>
-          {sukoCount}
+        <div className="d-flex flex-column align-items-center">
+          <input className="suko" type="button" value="" onClick={sukoPost} />
+          <h2 className="my-2" style={{ color: "var(--bs-ternary)" }}>
+            {sukoCount}
+          </h2>
         </div>
       )}
     </div>
