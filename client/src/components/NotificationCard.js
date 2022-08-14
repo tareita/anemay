@@ -24,7 +24,7 @@ const NotificationCard = (props) => {
           <span>
             <img
               style={{ width: "75px", height: "75px" }}
-              src="https://o.remove.bg/downloads/353f7cb0-84f8-4c15-afac-f56f71f6256f/anime-clipart-thumbs-up-konosuba-kazuma-thumbs-u-11562893319umxuw395qa-removebg-preview.png"
+              src="https://i.imgur.com/ZW5Fbao.png"
             />
           </span>
         );
@@ -97,7 +97,7 @@ const NotificationCard = (props) => {
                   className="mx-2"
                   style={{ color: "var(--bs-muted-white)" }}
                 >
-                  <i class="fa-regular fa-clock"></i> {timestamp}
+                  <i className="fa-regular fa-clock"></i> {timestamp}
                 </div>
               </div>
             </div>

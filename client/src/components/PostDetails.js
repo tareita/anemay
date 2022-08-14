@@ -17,6 +17,8 @@ const PostDetails = () => {
   const { title, content, author, sukoCount, sukod } = post;
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
+  const moment = require("moment");
+  moment().format();
 
   useEffect(() => {
     fetchPost();
@@ -62,55 +64,100 @@ const PostDetails = () => {
         <div>
           <Navbar />
           <div className="container">
-            <div className="my-3">
-              <Link to={"/posts/" + topicName}>Back to posts</Link>
+            <div className="back-to-posts my-3">
+              <Link to={"/posts/" + topicName}>
+                <i class="fa-solid fa-arrow-left"></i> Back to posts
+              </Link>
             </div>
-            <div className="card my-3">
+
+            <div className="card my-3 post-details">
               <div className="card-body">
-                {user && (user.username === author.username || user.isAdmin) && (
-                  <div>
-                    <button
-                      className="btn btn-danger"
-                      onClick={(e) => {
-                        if (!deleting) {
-                          setDeleting(true);
-                        } else {
-                          handleDeletePost(e);
-                        }
-                      }}
+                <div className="container">
+                  <div className="row">
+                    <div
+                      className="col-sm-1"
+                      style={{ borderRight: "1px solid black", width: "50px" }}
                     >
-                      {!deleting ? <div>Delete</div> : <div>Confirm</div>}
-                    </button>
-                    <button
-                      className="btn btn-warning mx-1"
-                      onClick={() => {
-                        setEditing(!editing);
-                      }}
-                    >
-                      {editing ? <div>Cancel</div> : <div>Edit</div>}
-                    </button>
+                      <div>
+                        <Suko
+                          postId={post._id}
+                          sukoCount={sukoCount}
+                          sukod={sukod}
+                          page={"postDetails"}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-sm-11">
+                      <div className="d-flex">
+                        <h5 className="card-subtitle mb-2">
+                          <Link to={"/users/" + author.username}>
+                            <i class="fa-regular fa-user" /> {author.username}
+                          </Link>
+                        </h5>
+                        <h6 className="mx-2">
+                          • <i class="fa-regular fa-clock mx-1"></i>{" "}
+                          {moment(post.createdAt).fromNow()}
+                        </h6>
+                        <h6>
+                          {post.edited && (
+                            <span style={{ color: "var(--bs-muted-white)" }}>
+                              (Edited)
+                            </span>
+                          )}
+                        </h6>
+                        <div className="author-section">
+                          {user &&
+                            (user.username === author.username ||
+                              user.isAdmin) && (
+                              <div>
+                                <button
+                                  className="btn delete"
+                                  onClick={(e) => {
+                                    if (!deleting) {
+                                      setDeleting(true);
+                                    } else {
+                                      handleDeletePost(e);
+                                    }
+                                  }}
+                                >
+                                  {!deleting ? (
+                                    <i class="fa-regular fa-trash-can"></i>
+                                  ) : (
+                                    <i class="fa-regular fa-square-check"></i>
+                                  )}
+                                </button>
+                                <button
+                                  className="btn mx-2 edit"
+                                  onClick={() => {
+                                    setEditing(!editing);
+                                  }}
+                                >
+                                  {editing ? (
+                                    <i class="fa-solid fa-ban"></i>
+                                  ) : (
+                                    <i class="fa-solid fa-pen"></i>
+                                  )}
+                                </button>
+                              </div>
+                            )}
+                        </div>
+                      </div>
+                      <h3 className="card-title mr-2 my-1">{title}</h3>
+                      {editing ? (
+                        <div>
+                          <ContentEditor
+                            handleSubmitEdit={handleSubmitEdit}
+                            content={content}
+                          />
+                        </div>
+                      ) : (
+                        <p className="card-text">
+                          <ReactMarkdown>{content}</ReactMarkdown>
+                        </p>
+                      )}
+                    </div>
                   </div>
-                )}
-                <Suko postId={post._id} sukoCount={sukoCount} sukod={sukod} />
-                <h5 className="card-title mr-2">{title}</h5>
-                {post.edited && <span className="text-muted">(Edited)</span>}
-                <h6 className="card-subtitle mb-2 text-muted">
-                  <Link to={"/users/" + author.username}>
-                    {author.username}
-                  </Link>
-                </h6>
-                {editing ? (
-                  <div>
-                    <ContentEditor
-                      handleSubmitEdit={handleSubmitEdit}
-                      content={content}
-                    />
-                  </div>
-                ) : (
-                  <p className="card-text">
-                    <ReactMarkdown>{content}</ReactMarkdown>
-                  </p>
-                )}
+                </div>
               </div>
             </div>
             <CreateComment
@@ -119,7 +166,7 @@ const PostDetails = () => {
               comments={comments}
               setPost={setPost}
             />
-            <div>
+            <div className="my-3">
               <Comments
                 comments={comments}
                 post={post}

@@ -5,7 +5,9 @@ const Comments = (props) => {
   const { comments, post, setComments } = props;
   return (
     <div>
-      <h6>Comments:</h6>
+      <h5 className="mb-3">
+        <i class="fa-regular fa-comment"></i> Comments:
+      </h5>
       {comments.map((comment, index) => (
         <Comment
           comment={comment}

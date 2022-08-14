@@ -12,10 +12,15 @@ const ContentEditor = (props) => {
     <div>
       <form>
         <div className="mb-3">
-          <label className="form-label">Edit content:</label>
+          <label
+            className="form-label my-2"
+            style={{ color: "var(--bs-ternary)" }}
+          >
+            Edit content:
+          </label>
           <textarea
             rows={4}
-            className="form-control"
+            className="form-control mb-3"
             name="content"
             value={formData.content}
             onChange={handleFormDataChange}

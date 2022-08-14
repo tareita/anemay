@@ -19,12 +19,20 @@ const Post = (props) => {
   moment().format();
 
   return (
-    <div className="card mb-3">
+    <div className="card mb-3 post">
       <div className="card-body">
         <div className="container">
           <div className="row">
-            <div className="col-sm-1">
-              <Suko sukod={sukod} sukoCount={sukoCount} postId={_id} />
+            <div
+              className="col-sm-1"
+              style={{ borderRight: "1px solid black" }}
+            >
+              <Suko
+                sukod={sukod}
+                sukoCount={sukoCount}
+                postId={_id}
+                page={"posts"}
+              />
             </div>
             <div className="col-sm-11">
               <div className="d-flex justify-content-between">

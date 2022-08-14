@@ -10,6 +10,8 @@ const Comment = (props) => {
   const [editing, setEditing] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+  const moment = require("moment");
+  moment().format();
 
   const handleDeleteComment = async (e) => {
     e.preventDefault();
@@ -41,23 +43,75 @@ const Comment = (props) => {
 
   return (
     <div>
-      <div className="card mb-3">
+      <div className="card mb-3 comment">
         <div className="card-body">
-          <h5 className="card-subtitle mb-2 text-muted">
-            <Link to={"/users/" + author.username}>{author.username}</Link>
-          </h5>
-          {comment.edited && <span className="text-muted">(Edited)</span>}
+          <div className="d-flex">
+            <h5 className="card-subtitle mb-2 text-muted">
+              <Link to={"/users/" + author.username}>
+                <i class="fa-regular fa-user" /> {author.username}
+              </Link>
+            </h5>
+            <h6 className="mx-2">
+              • <i class="fa-regular fa-clock mx-1"></i>{" "}
+              {moment(comment.createdAt).fromNow()}
+            </h6>
+            <h6>
+              {comment.edited && (
+                <span style={{ color: "var(--bs-muted-white)" }}>(Edited)</span>
+              )}
+            </h6>
+            <div className="author-section">
+              {(user.username === author.username || user.isAdmin) && (
+                <div className="my-2">
+                  <button
+                    className="btn delete"
+                    onClick={(e) => {
+                      if (!deleting) {
+                        setDeleting(true);
+                      } else {
+                        handleDeleteComment(e);
+                      }
+                    }}
+                  >
+                    {!deleting ? (
+                      <i class="fa-regular fa-trash-can"></i>
+                    ) : (
+                      <i class="fa-regular fa-square-check"></i>
+                    )}
+                  </button>
+
+                  <button
+                    className="btn mx-1 edit"
+                    onClick={() => {
+                      setEditing(!editing);
+                    }}
+                  >
+                    {editing ? (
+                      <i class="fa-solid fa-ban"></i>
+                    ) : (
+                      <i class="fa-solid fa-pen"></i>
+                    )}
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
           {repliedTo && (
             <div
-              className="card card-body my-3"
-              style={{ backgroundColor: "#fafcc7" }}
+              className="card card-body my-3 comment"
+              style={{ backgroundColor: "var(--bs-primary)" }}
             >
-              <h5 className="card-subtitle mb-2 text-muted">
-                {repliedTo.author.username} said:
-              </h5>
-              <p className="card-text">{repliedTo.content}</p>
+              <h6 className="card-subtitle mb-2">
+                <i class="fa-solid fa-reply" /> {repliedTo.author.username}{" "}
+                said:
+              </h6>
+              <p className="card-text" style={{ fontSize: "larger" }}>
+                {repliedTo.content}
+              </p>
             </div>
           )}
+
           {editing ? (
             <div>
               <ContentEditor
@@ -66,7 +120,9 @@ const Comment = (props) => {
               />
             </div>
           ) : (
-            <p className="card-text">{content}</p>
+            <p className="card-text" style={{ fontSize: "larger" }}>
+              {content}
+            </p>
           )}
           <button
             className="btn btn-primary"
@@ -74,7 +130,7 @@ const Comment = (props) => {
               setReplying(!replying);
             }}
           >
-            Reply
+            <i class="fa-solid fa-reply" /> Reply
           </button>
           {replying && (
             <div>
@@ -85,31 +141,6 @@ const Comment = (props) => {
                 repliedTo={_id}
                 setReplying={setReplying}
               />
-            </div>
-          )}
-          {(user.username === author.username || user.isAdmin) && (
-            <div className="my-2">
-              <button
-                className="btn btn-danger"
-                onClick={(e) => {
-                  if (!deleting) {
-                    setDeleting(true);
-                  } else {
-                    handleDeleteComment(e);
-                  }
-                }}
-              >
-                {!deleting ? <div>Delete</div> : <div>Confirm</div>}
-              </button>
-
-              <button
-                className="btn btn-warning mx-1"
-                onClick={() => {
-                  setEditing(!editing);
-                }}
-              >
-                {editing ? <div>Cancel</div> : <div>Edit</div>}
-              </button>
             </div>
           )}
         </div>

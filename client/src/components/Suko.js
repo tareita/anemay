@@ -6,6 +6,7 @@ const Suko = (props) => {
   const [sukoCount, setSukoCount] = useState(props.sukoCount);
   const [sukod, setSukod] = useState(props.sukod);
   const navigate = useNavigate();
+  const { page } = props;
 
   const sukoPost = async () => {
     if (user) {
@@ -39,12 +40,35 @@ const Suko = (props) => {
     });
   };
 
+  const getUnSukoStyling = () => {
+    if (page == "posts") {
+      return "un-suko-big";
+    } else if (page == "postDetails") {
+      return "un-suko-small";
+    } else {
+      return "invalid";
+    }
+  };
+
+  const getSukoStyling = () => {
+    if (page == "posts") {
+      return "suko-big";
+    } else if (page == "postDetails") {
+      return "suko-small";
+    } else {
+      return "invalid";
+    }
+  };
+
   return (
     <div>
       {sukod ? (
-        <div className="d-flex flex-column align-items-center">
+        <div
+          className="d-flex flex-column align-items-center"
+          style={{ paddingRight: "10px" }}
+        >
           <input
-            className="un-suko"
+            className={getUnSukoStyling()}
             type="button"
             value=""
             onClick={unSukoPost}
@@ -54,8 +78,16 @@ const Suko = (props) => {
           </h2>
         </div>
       ) : (
-        <div className="d-flex flex-column align-items-center">
-          <input className="suko" type="button" value="" onClick={sukoPost} />
+        <div
+          className="d-flex flex-column align-items-center"
+          style={{ paddingRight: "10px" }}
+        >
+          <input
+            className={getSukoStyling()}
+            type="button"
+            value=""
+            onClick={sukoPost}
+          />
           <h2 className="my-2" style={{ color: "var(--bs-ternary)" }}>
             {sukoCount}
           </h2>

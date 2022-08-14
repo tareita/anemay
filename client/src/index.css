@@ -125,8 +125,8 @@ a:hover {
     -webkit-box-orient: vertical;
 }
 
-.un-suko {
-    background: url(https://o.remove.bg/downloads/1b0f787e-335a-4bf2-bdac-b20ed14e0424/image-removebg-preview.png) no-repeat;
+.un-suko-big {
+    background: url(https://i.imgur.com/Q0riDEW.png) no-repeat;
     cursor: pointer;
     border: none;
     background-size: 75px;
@@ -134,12 +134,30 @@ a:hover {
     height: 75px;
 }
 
-.suko {
-background: url(https://o.remove.bg/downloads/f6b9ab6a-2a20-487c-ba25-6183a42a8755/anime-clipart-thumbs-up-konosuba-kazuma-thumbs-u-11562893319umxuw395qa-removebg-preview.png) no-repeat;    cursor: pointer;
+.un-suko-small {
+    background: url(https://i.imgur.com/Q0riDEW.png) no-repeat;
+    cursor: pointer;
+    border: none;
+    background-size: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.suko-big {
+background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;    cursor: pointer;
     border: none;
     background-size: 75px;
     width: 75px;
     height: 75px;
+}
+
+.suko-small {
+    background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;
+        cursor: pointer;
+        border: none;
+        background-size: 40px;
+        width: 40px;
+        height: 40px;
 }
 
 .post-card a {
@@ -170,4 +188,67 @@ background: url(https://o.remove.bg/downloads/f6b9ab6a-2a20-487c-ba25-6183a42a87
 
 .back-to-posts a:hover {
     color: var(--bs-ternary);
+}
+
+.post {
+    border: 1px solid black;
+}
+
+.comment {
+    border: 1px solid black
+}
+
+.comment a {
+    color: var(--bs-ternary);
+}
+
+.comment a:hover {
+    color: var(--bs-white);
+}
+
+.post-details .card-subtitle a{
+    color: var(--bs-ternary);
+}
+
+.post-details .card-subtitle a:hover {
+    color: var(--bs-white);
+}
+
+.post-details .author-section {
+    margin-left: auto;
+}
+
+.comment .author-section {
+    margin-left: auto;
+}
+
+.author-section .edit {
+    padding: 0%;
+    background-color: var(--bs-secondary);
+    color: var(--bs-ternary);
+    border: none;
+}
+
+.author-section .delete {
+    padding: 0%;
+    background-color: var(--bs-secondary);
+    color: var(--bs-ternary);
+    border: none;
+    margin-right: 10px;
+}
+
+.author-section btn:hover {
+    color: var(--bs-ternary);
+}
+
+.author-section btn:hover {
+    color: var(--bs-white);
+}
+
+.create-post .title {
+    color: var(--bs-ternary);
+}
+
+.create-post .form {
+    font-size: larger;
 }

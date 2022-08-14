@@ -29,8 +29,8 @@ const CreatePost = () => {
   return (
     <div>
       <Navbar />
-      <div className="container">
-        <h3 className="my-4">Create a post:</h3>
+      <div className="container create-post">
+        <h3 className="my-4 title">What would you like to post?</h3>
         <form>
           <div className="mb-3">
             <label className="form-label">Title</label>
