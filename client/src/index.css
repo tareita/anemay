@@ -265,3 +265,21 @@ background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;    cursor: pointer;
 .about-me .card-header {
     padding-bottom: 1px;
 }
+
+.stats {
+    margin-left: 125px;
+}
+
+.nav-link {
+    color: var(--bs-ternary);
+}
+
+.nav-link:hover {
+    color: var(--bs-white);
+}
+
+
+.active{
+    background-color: var(--bs-secondary);
+    color: var(--bs-ternary);
+}

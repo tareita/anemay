@@ -10,6 +10,7 @@ const UserProfile = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [totalPosts, setTotalPosts] = useState(0);
+  const [totalSukos, setTotalSukos] = useState(0);
   const user = JSON.parse(localStorage.getItem("user"));
   const [tab, setTab] = useState("posts");
   const [profileUser, setProfileUser] = useState();
@@ -31,6 +32,7 @@ const UserProfile = () => {
     setPosts(data.posts);
     setProfileUser(data.user);
     setTotalPosts(data.totalPosts);
+    setTotalSukos(data.totalSukos);
   };
 
   const fetchComments = async () => {
@@ -57,8 +59,9 @@ const UserProfile = () => {
                 setProfileUser={setProfileUser}
               />
             </div>
-            <div className="stats" style={{ color: "var(--bs-ternary)" }}>
-              <div>Posts: {totalPosts}</div>
+            <div className="stats mb-1" style={{ color: "var(--bs-ternary)" }}>
+              <span className="mx-3">Posts: {totalPosts}</span>
+              <span>Sukos: {totalSukos}</span>
             </div>
           </div>
           <div className="col-sm-8 mx-5" style={{ maxWidth: "700px" }}>

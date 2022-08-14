@@ -27,7 +27,7 @@ const UserAboutMe = (props) => {
           <div className="card-header">
             <div className="d-flex justify-content-between">
               <h5>
-                <i class="fa-regular fa-address-card"></i> About Me:
+                <i class="fa-solid fa-user-pen"></i> About Me:
               </h5>
               {user.username === profileUser.username && (
                 <button
