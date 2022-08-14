@@ -9,6 +9,7 @@ const UserProfile = () => {
   const { username } = useParams();
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
+  const [totalPosts, setTotalPosts] = useState(0);
   const user = JSON.parse(localStorage.getItem("user"));
   const [tab, setTab] = useState("posts");
   const [profileUser, setProfileUser] = useState();
@@ -29,6 +30,7 @@ const UserProfile = () => {
     const data = await res.json();
     setPosts(data.posts);
     setProfileUser(data.user);
+    setTotalPosts(data.totalPosts);
   };
 
   const fetchComments = async () => {
@@ -41,13 +43,23 @@ const UserProfile = () => {
     <div>
       <Navbar />
       <div className="container">
-        <h2 className="my-4">{username}'s profile </h2>
+        <h2 className="my-4" style={{ color: "var(--bs-ternary)" }}>
+          {username}'s profile{" "}
+        </h2>
         <div className="row">
-          <div className="col-sm-4 card" style={{ maxHeight: "350px" }}>
-            <UserAboutMe
-              profileUser={profileUser}
-              setProfileUser={setProfileUser}
-            />
+          <div className="col-sm-4">
+            <div
+              className="card"
+              style={{ height: "350px", border: "1px solid black" }}
+            >
+              <UserAboutMe
+                profileUser={profileUser}
+                setProfileUser={setProfileUser}
+              />
+            </div>
+            <div className="stats" style={{ color: "var(--bs-ternary)" }}>
+              <div>Posts: {totalPosts}</div>
+            </div>
           </div>
           <div className="col-sm-8 mx-5" style={{ maxWidth: "700px" }}>
             <ul className="nav nav-tabs mb-4">
@@ -76,7 +88,7 @@ const UserProfile = () => {
             {tab == "posts" && (
               <div>
                 {posts.map((post, index) => (
-                  <Post post={post} key={index} />
+                  <Post post={post} key={index} page={"postDetails"} />
                 ))}
               </div>
             )}

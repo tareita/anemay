@@ -27,7 +27,7 @@ const ContentEditor = (props) => {
           />
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn"
             onClick={(e) => {
               handleSubmitEdit(e, formData);
             }}

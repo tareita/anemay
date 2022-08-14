@@ -74,6 +74,7 @@ const getPost = async (req, res) => {
 
 const getUserPosts = async (req, res) => {
   const username = req.params.username;
+  const totalSukos = 0;
 
   const user = await User.findOne({ username });
 
@@ -89,7 +90,10 @@ const getUserPosts = async (req, res) => {
 
   await setExistingSukos(req, posts);
 
-  return res.send({ posts, user });
+  const totalPosts = posts.length;
+
+  console.log(totalSukos);
+  return res.send({ posts, user, totalPosts, totalSukos });
 };
 
 const createPost = async (req, res) => {

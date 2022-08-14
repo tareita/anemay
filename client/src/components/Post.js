@@ -15,8 +15,17 @@ const Post = (props) => {
     topic,
     createdAt,
   } = props.post;
+  const { page } = props;
   const moment = require("moment");
   moment().format();
+
+  const getPage = () => {
+    if (page) {
+      return "postDetails";
+    } else {
+      return "posts";
+    }
+  };
 
   return (
     <div className="card mb-3 post">
@@ -31,7 +40,7 @@ const Post = (props) => {
                 sukod={sukod}
                 sukoCount={sukoCount}
                 postId={_id}
-                page={"posts"}
+                page={getPage()}
               />
             </div>
             <div className="col-sm-11">

@@ -73,9 +73,15 @@ const Suko = (props) => {
             value=""
             onClick={unSukoPost}
           />
-          <h2 className="my-2" style={{ color: "var(--bs-ternary)" }}>
-            {sukoCount}
-          </h2>
+          {page === "posts" ? (
+            <h2 className="my-2" style={{ color: "var(--bs-ternary)" }}>
+              {sukoCount}
+            </h2>
+          ) : (
+            <h4 className="my-2" style={{ color: "var(--bs-ternary)" }}>
+              {sukoCount}
+            </h4>
+          )}
         </div>
       ) : (
         <div
@@ -88,9 +94,15 @@ const Suko = (props) => {
             value=""
             onClick={sukoPost}
           />
-          <h2 className="my-2" style={{ color: "var(--bs-ternary)" }}>
-            {sukoCount}
-          </h2>
+          {page === "posts" ? (
+            <h2 className="my-2" style={{ color: "var(--bs-ternary)" }}>
+              {sukoCount}
+            </h2>
+          ) : (
+            <h4 className="my-2" style={{ color: "var(--bs-ternary)" }}>
+              {sukoCount}
+            </h4>
+          )}
         </div>
       )}
     </div>

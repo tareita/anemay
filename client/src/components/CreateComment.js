@@ -32,7 +32,10 @@ const CreateComment = (props) => {
       <div className="card-body">
         <form>
           <div className="mb-3">
-            <label className="form-label">Create a comment:</label>
+            <label className="form-label">
+              {" "}
+              <i class="fa-regular fa-pen-to-square"></i> Create a comment:
+            </label>
             <textarea
               rows={3}
               className="form-control"
@@ -44,7 +47,7 @@ const CreateComment = (props) => {
 
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn"
             onClick={handleSubmitClick}
             disabled={!formData.content}
           >

@@ -222,7 +222,7 @@ background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;    cursor: pointer;
     margin-left: auto;
 }
 
-.author-section .edit {
+.edit {
     padding: 0%;
     background-color: var(--bs-secondary);
     color: var(--bs-ternary);
@@ -249,6 +249,19 @@ background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;    cursor: pointer;
     color: var(--bs-ternary);
 }
 
-.create-post .form {
-    font-size: larger;
+.form-control {
+    background-color: var(--bs-secondary);
+    color: var(--bs-white);
+    
+}
+
+.form-control:focus {
+    background-color: var(--bs-secondary);
+    color: var(--bs-white);
+    border-color: var(--bs-ternary);
+    box-shadow: 0 0 2px var(--bs-ternary);
+}
+
+.about-me .card-header {
+    padding-bottom: 1px;
 }

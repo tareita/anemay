@@ -32,8 +32,10 @@ const CreatePost = () => {
       <div className="container create-post">
         <h3 className="my-4 title">What would you like to post?</h3>
         <form>
-          <div className="mb-3">
-            <label className="form-label">Title</label>
+          <div className="mb-4">
+            <label className="form-label mb-0">
+              <h5>Title</h5>
+            </label>
             <input
               className="form-control"
               value={formData.title}
@@ -42,7 +44,9 @@ const CreatePost = () => {
             />
           </div>
           <div className="mb-3">
-            <label className="form-label">Content</label>
+            <label className="form-label mb-0">
+              <h5>Content</h5>
+            </label>
             <textarea
               rows={8}
               className="form-control"
@@ -55,9 +59,9 @@ const CreatePost = () => {
           </div>
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn"
             onClick={handleSubmitClick}
-            disabled={!formData.content}
+            disabled={!formData.content || !formData.title}
           >
             Submit
           </button>

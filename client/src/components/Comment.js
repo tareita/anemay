@@ -125,15 +125,23 @@ const Comment = (props) => {
             </p>
           )}
           <button
-            className="btn btn-primary"
+            className="btn "
             onClick={() => {
               setReplying(!replying);
             }}
           >
-            <i class="fa-solid fa-reply" /> Reply
+            {!replying ? (
+              <div>
+                <i class="fa-solid fa-reply"></i> Reply
+              </div>
+            ) : (
+              <div>
+                <i class="fa-solid fa-ban"></i> Cancel
+              </div>
+            )}
           </button>
           {replying && (
-            <div>
+            <div className="my-3">
               <CreateComment
                 post={post}
                 setComments={setComments}

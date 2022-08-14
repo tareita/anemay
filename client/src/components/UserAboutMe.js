@@ -23,19 +23,27 @@ const UserAboutMe = (props) => {
   return (
     <div>
       {profileUser && (
-        <div>
-          <div className="card-header container-fluid">
-            <div>About Me:</div>
-            {user.username === profileUser.username && (
-              <button
-                className="btn btn-warning"
-                onClick={() => {
-                  setEditing(!editing);
-                }}
-              >
-                {editing ? <div>Cancel</div> : <div>Edit</div>}
-              </button>
-            )}
+        <div className="about-me">
+          <div className="card-header">
+            <div className="d-flex justify-content-between">
+              <h5>
+                <i class="fa-regular fa-address-card"></i> About Me:
+              </h5>
+              {user.username === profileUser.username && (
+                <button
+                  className="btn edit"
+                  onClick={() => {
+                    setEditing(!editing);
+                  }}
+                >
+                  {editing ? (
+                    <i class="fa-solid fa-ban"></i>
+                  ) : (
+                    <i class="fa-solid fa-pen"></i>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
           <div className="mb-3 card-body">
             {editing ? (
@@ -50,7 +58,9 @@ const UserAboutMe = (props) => {
                 {profileUser.aboutMe ? (
                   <div>{profileUser.aboutMe}</div>
                 ) : (
-                  <i className="text-muted">No About Me yet..</i>
+                  <i style={{ color: "var(--bs-muted-white)" }}>
+                    No About Me yet..
+                  </i>
                 )}
               </p>
             )}
