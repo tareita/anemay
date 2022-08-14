@@ -36,7 +36,7 @@ const Register = () => {
         <div className="row">
           <div className="col-sm-6">
             <img
-              src="https://o.remove.bg/downloads/3e44350d-54cb-4a9d-b187-1fca9b59b111/image-removebg-preview.png"
+              src="https://i.imgur.com/HgVdmlt.png"
               style={{ width: "90%" }}
             />
           </div>
