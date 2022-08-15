@@ -26,7 +26,7 @@ app.use("/users", users);
 app.use("/comments", comments);
 app.use("/notifications", notifications);
 
-app.use(express.static(path.join(__dirname, "/client")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build", "index.html"));
