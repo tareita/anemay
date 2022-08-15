@@ -30,7 +30,7 @@ const UserAboutMe = (props) => {
               <h5>
                 <i class="fa-solid fa-user-pen"></i> About Me:
               </h5>
-              {user.username === profileUser.username && (
+              {user && user.username === profileUser.username && (
                 <button
                   className="btn edit"
                   onClick={() => {
