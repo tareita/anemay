@@ -61,7 +61,7 @@ const Comment = (props) => {
               )}
             </h6>
             <div className="author-section">
-              {(user.username === author.username || user.isAdmin) && (
+              {user && (user.username === author.username || user.isAdmin) && (
                 <div className="my-2">
                   <button
                     className="btn delete"

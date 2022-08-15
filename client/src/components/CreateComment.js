@@ -57,7 +57,7 @@ const CreateComment = (props) => {
       </div>
     </div>
   ) : (
-    <h5>
+    <h5 className="view-post">
       <Link to="/login">Login</Link> to create a comment
     </h5>
   );

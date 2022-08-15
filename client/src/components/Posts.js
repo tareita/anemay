@@ -47,8 +47,10 @@ const Posts = () => {
             </div>
             <h1 className="mb-4 topic-title">{topicName} </h1>
             <div className="mb-4">
-              {topic.isLocked && !user.isAdmin ? (
-                <h4>This topic is locked.</h4>
+              {user && topic.isLocked && !user.isAdmin ? (
+                <h4>
+                  <i class="fa-solid fa-lock"></i> This topic is locked.
+                </h4>
               ) : (
                 <h4>
                   <Link to={checkLoggedIn()}>

@@ -8,7 +8,7 @@ const HomePage = () => {
       <Navbar />
       <div className="container">
         <h2
-          className="my-3"
+          className="my-4"
           style={{ color: "var(--bs-ternary)", fontSize: "30px" }}
         >
           Topics
