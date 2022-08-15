@@ -21,10 +21,10 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(cors());
-app.use("/posts", posts);
-app.use("/users", users);
-app.use("/comments", comments);
-app.use("/notifications", notifications);
+app.use("/api/posts", posts);
+app.use("/api/users", users);
+app.use("/api/comments", comments);
+app.use("/api/notifications", notifications);
 
 app.use(express.static(path.join(__dirname, "/client/build")));
 
