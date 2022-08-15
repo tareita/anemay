@@ -201,7 +201,7 @@ const updatePost = async (req, res) => {
   if (!post) {
     return res.send("post not found");
   }
-  if (post.author != userId && !isAdmin) {
+  if (userId != post.author && !isAdmin) {
     return res.send("post isnt yours");
   }
   await post.updateOne({ title, content, edited: true });
