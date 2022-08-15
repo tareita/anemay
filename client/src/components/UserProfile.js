@@ -61,11 +61,11 @@ const UserProfile = () => {
               />
             </div>
             <div className="stats mb-1" style={{ color: "var(--bs-ternary)" }}>
-              <span className="mx-3">Posts: {totalPosts}</span>
-              <span>Sukos: {totalSukos}</span>
+              <span className="mx-1">Posts: {totalPosts}</span>{" "}
+              <span className="mx-1">Sukos: {totalSukos}</span>
             </div>
           </div>
-          <div className="col-sm-8 mx-5" style={{ maxWidth: "700px" }}>
+          <div className="col-sm-8" style={{ maxWidth: "700px" }}>
             <ul className="nav nav-tabs mb-4">
               <li className="nav-item">
                 <a

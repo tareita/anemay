@@ -61,11 +61,11 @@ const NotificationCard = (props) => {
       >
         <div className="card-body">
           <div className="container">
-            <div className="row">
-              <div className="col-sm-1">
+            <div className="d-flex flex-direction-start">
+              <div className="me-4">
                 <h5 className="notif-icon">{getNotificationIcon()}</h5>
               </div>
-              <div className="col-sm-11">
+              <div>
                 <h5 className="card-text my-0">
                   <Link
                     to={"/users/" + notification.notifier.username}

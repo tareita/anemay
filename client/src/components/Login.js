@@ -40,7 +40,7 @@ const Login = () => {
         <div className="row mt-4">
           <div className="col-sm-6">
             <img
-              src="https://media.discordapp.net/attachments/1007296235293646919/1007768168158199938/dbwtw2f-08f749a9-21d9-4ca1-870e-ca14b70f7009.png?width=428&height=605"
+              src="https://i.imgur.com/Ow6ftGd.png"
               style={{ width: "450px" }}
             />
           </div>

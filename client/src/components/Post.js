@@ -19,31 +19,16 @@ const Post = (props) => {
   const moment = require("moment");
   moment().format();
 
-  const getPage = () => {
-    if (page) {
-      return "postDetails";
-    } else {
-      return "posts";
-    }
-  };
-
   return (
     <div className="card mb-3 post">
       <div className="card-body">
         <div className="container">
-          <div className="row">
-            <div
-              className="col-lg-1"
-              style={{ borderRight: "1px solid black" }}
-            >
-              <Suko
-                sukod={sukod}
-                sukoCount={sukoCount}
-                postId={_id}
-                page={getPage()}
-              />
+          <div className="d-flex flex-direction-start">
+            <div>
+              <Suko sukod={sukod} sukoCount={sukoCount} postId={_id} />
             </div>
-            <div className="col-lg-11">
+            <div className="vr mx-4"></div>
+            <div style={{ flex: "auto" }}>
               <div className="d-flex justify-content-between">
                 <h3 className="card-title">{title}</h3>{" "}
                 <h6>
