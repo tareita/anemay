@@ -3,16 +3,13 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
 dotenv.config();
 const { Schema } = mongoose;
 const posts = require("./routes/posts");
 const users = require("./routes/users");
 const comments = require("./routes/comments");
 const notifications = require("./routes/notifications");
-
-app.listen(4000, () => {
-  console.log("server started");
-});
 
 mongoose.connect(
   process.env.MONGO_URI,
@@ -28,3 +25,13 @@ app.use("/posts", posts);
 app.use("/users", users);
 app.use("/comments", comments);
 app.use("/notifications", notifications);
+
+app.use(express.static(path.join(__dirname, "/client")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
+
+app.listen(process.env.PORT || 4000, () => {
+  console.log("server started");
+});

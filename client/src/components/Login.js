@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 import ErrorAlert from "./ErrorAlert";
 import { Navbar } from "./Navbar";
 
@@ -15,7 +16,7 @@ const Login = () => {
 
   const handleSubmitClick = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/users/login/", {
+    const res = await fetch(API_URL + "users/login/", {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {

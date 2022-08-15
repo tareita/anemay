@@ -7,6 +7,7 @@ import { Navbar } from "./Navbar";
 import ReactMarkdown from "react-markdown";
 import Suko from "./Suko";
 import ContentEditor from "./ContentEditor";
+import { API_URL } from "../config";
 
 const PostDetails = () => {
   const { topicName, id } = useParams();
@@ -29,7 +30,7 @@ const PostDetails = () => {
     if (user) {
       headers = { token: user.token };
     }
-    const res = await fetch("http://localhost:4000/posts/" + id, {
+    const res = await fetch(API_URL + "posts/" + id, {
       headers,
     });
     const data = await res.json();
@@ -39,7 +40,7 @@ const PostDetails = () => {
 
   const handleDeletePost = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/posts/" + id, {
+    const res = await fetch(API_URL + "posts/" + id, {
       method: "DELETE",
       headers: { "Content-Type": "application/json", token: user.token },
     });
@@ -50,7 +51,7 @@ const PostDetails = () => {
 
   const handleSubmitEdit = async (e, formData) => {
     e.preventDefault();
-    await fetch("http://localhost:4000/posts/" + id, {
+    await fetch(API_URL + "posts/" + id, {
       method: "PATCH",
       headers: { "Content-Type": "application/json", token: user.token },
     });

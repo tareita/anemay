@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_URL } from "../config";
 import ContentEditor from "./ContentEditor";
 
 const UserAboutMe = (props) => {
@@ -8,7 +9,7 @@ const UserAboutMe = (props) => {
 
   const handleSubmitEdit = async (e, formData) => {
     e.preventDefault();
-    await fetch("http://localhost:4000/users/" + profileUser.username, {
+    await fetch(API_URL + "users/" + profileUser.username, {
       method: "PATCH",
       body: JSON.stringify({ aboutMe: formData.content }),
       headers: {

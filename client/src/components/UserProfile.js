@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { API_URL } from "../config";
 import { Navbar } from "./Navbar";
 import Post from "./Post";
 import UserAboutMe from "./UserAboutMe";
@@ -25,7 +26,7 @@ const UserProfile = () => {
     if (user) {
       headers = { token: user.token };
     }
-    const res = await fetch("http://localhost:4000/posts/users/" + username, {
+    const res = await fetch(API_URL + "posts/users/" + username, {
       headers,
     });
     const data = await res.json();
@@ -36,7 +37,7 @@ const UserProfile = () => {
   };
 
   const fetchComments = async () => {
-    const res = await fetch("http://localhost:4000/comments/users/" + username);
+    const res = await fetch(API_URL + "comments/users/" + username);
     const data = await res.json();
     setComments(data.comments);
   };

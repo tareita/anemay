@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ContentEditor from "./ContentEditor";
 import CreateComment from "./CreateComment";
+import { API_URL } from "../config";
 
 const Comment = (props) => {
   const { author, content, repliedTo, _id } = props.comment;
@@ -15,7 +16,7 @@ const Comment = (props) => {
 
   const handleDeleteComment = async (e) => {
     e.preventDefault();
-    await fetch("http://localhost:4000/comments/" + _id, {
+    await fetch(API_URL + "comments/" + _id, {
       method: "DELETE",
       headers: { "Content-Type": "application/json", token: user.token },
     });
@@ -24,7 +25,7 @@ const Comment = (props) => {
 
   const handleSubmitEdit = async (e, formData) => {
     e.preventDefault();
-    await fetch("http://localhost:4000/comments/" + _id, {
+    await fetch(API_URL + "comments/" + _id, {
       method: "PATCH",
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json", token: user.token },

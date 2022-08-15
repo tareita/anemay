@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../config";
 
 const CreateComment = (props) => {
   const { post, comments, setComments, repliedTo, setReplying } = props;
@@ -16,7 +17,7 @@ const CreateComment = (props) => {
       setReplying(false);
     }
     const body = { ...formData, postId: post._id, repliedTo };
-    const res = await fetch("http://localhost:4000/comments/", {
+    const res = await fetch(API_URL + "comments/", {
       method: "POST",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json", token: user.token },

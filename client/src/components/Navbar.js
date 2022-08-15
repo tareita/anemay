@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
@@ -19,7 +20,7 @@ export const Navbar = () => {
   };
 
   const fetchNotificationCount = async () => {
-    const res = await fetch("http://localhost:4000/notifications/count", {
+    const res = await fetch(API_URL + "notifications/count", {
       headers: { token: user.token },
     });
     const data = await res.json();

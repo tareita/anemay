@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 const Suko = (props) => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -17,7 +18,7 @@ const Suko = (props) => {
       }
       setSukod(true);
 
-      await fetch("http://localhost:4000/posts/suko/" + props.postId, {
+      await fetch(API_URL + "posts/suko/" + props.postId, {
         method: "POST",
         headers: { "Content-Type": "application/json", token: user.token },
       });
@@ -34,7 +35,7 @@ const Suko = (props) => {
     }
     setSukod(false);
 
-    await fetch("http://localhost:4000/posts/unsuko/" + props.postId, {
+    await fetch(API_URL + "posts/unsuko/" + props.postId, {
       method: "POST",
       headers: { "Content-Type": "application/json", token: user.token },
     });

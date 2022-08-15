@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_URL } from "../config";
 import { Navbar } from "./Navbar";
 
 const CreatePost = () => {
@@ -17,7 +18,7 @@ const CreatePost = () => {
 
   const handleSubmitClick = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/posts", {
+    const res = await fetch(API_URL + "posts", {
       method: "POST",
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json", token: user.token },

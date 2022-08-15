@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import { Navbar } from "./Navbar";
 import NotificationCard from "./NotificationCard";
 
@@ -13,7 +14,7 @@ const NotificationsPage = () => {
   }, []);
 
   const fetchNotifications = async () => {
-    const res = await fetch("http://localhost:4000/notifications", {
+    const res = await fetch(API_URL + "notifications", {
       headers: {
         token: user.token,
       },

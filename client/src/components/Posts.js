@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { API_URL } from "../config";
 import { Navbar } from "./Navbar";
 import Post from "./Post";
 
@@ -18,7 +19,7 @@ const Posts = () => {
     if (user) {
       headers = { token: user.token };
     }
-    const res = await fetch("http://localhost:4000/posts/topics/" + topicName, {
+    const res = await fetch(API_URL + "posts/topics/" + topicName, {
       headers,
     });
     const data = await res.json();

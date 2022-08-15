@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Navbar } from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorAlert from "./ErrorAlert";
+import { API_URL } from "../config";
 
 const Register = () => {
   const [formData, setFormData] = useState({});
@@ -15,7 +16,7 @@ const Register = () => {
 
   const handleSubmitClick = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/users/register", {
+    const res = await fetch(API_URL + "users/register", {
       method: "POST",
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json" },
