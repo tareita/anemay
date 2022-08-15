@@ -67,6 +67,9 @@ a:hover {
     background-color: var(--bs-ternary);
 }
 
+.navbar {
+    padding: 15px 0 15px 0;
+}
 .nav .register {
     border: 1px solid var(--bs-secondary);
     padding: 6px;
@@ -282,4 +285,27 @@ background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;    cursor: pointer;
 .active{
     background-color: var(--bs-secondary);
     color: var(--bs-ternary);
+}
+.navbar-design .desktop {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .mobile-nav {
+        display: block;
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+}
+
+.topic {
+    padding-right: 20px;
 }

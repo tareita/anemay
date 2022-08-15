@@ -33,7 +33,7 @@ const Post = (props) => {
         <div className="container">
           <div className="row">
             <div
-              className="col-sm-1"
+              className="col-lg-1"
               style={{ borderRight: "1px solid black" }}
             >
               <Suko
@@ -43,7 +43,7 @@ const Post = (props) => {
                 page={getPage()}
               />
             </div>
-            <div className="col-sm-11">
+            <div className="col-lg-11">
               <div className="d-flex justify-content-between">
                 <h3 className="card-title">{title}</h3>{" "}
                 <h6>

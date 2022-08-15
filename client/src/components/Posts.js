@@ -45,6 +45,7 @@ const Posts = () => {
                 <i class="fa-solid fa-arrow-left"></i> Back to topics
               </Link>
             </div>
+
             <h1 className="mb-4 topic-title">{topicName} </h1>
             <div className="mb-4">
               {user && topic.isLocked && !user.isAdmin ? (

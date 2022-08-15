@@ -21,7 +21,6 @@ const HomePage = () => {
             <img
               src="https://i.pinimg.com/originals/b3/f3/4c/b3f34c47c855b3388768c26e2111de33.png"
               style={{ width: "100%" }}
-              className="mx-4"
             />
           </div>
         </div>
