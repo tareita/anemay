@@ -74,21 +74,17 @@ const PostDetails = () => {
             <div className="card my-3 post-details">
               <div className="card-body">
                 <div className="container">
-                  <div className="row">
-                    <div
-                      className="col-sm-1"
-                      style={{ borderRight: "1px solid black", width: "50px" }}
-                    >
-                      <div>
-                        <Suko
-                          postId={post._id}
-                          sukoCount={sukoCount}
-                          sukod={sukod}
-                          page={"postDetails"}
-                        />
-                      </div>
+                  <div className="d-flex flex-direction-start">
+                    <div>
+                      <Suko
+                        postId={post._id}
+                        sukoCount={sukoCount}
+                        sukod={sukod}
+                      />
                     </div>
-                    <div className="col-sm-11">
+
+                    <div className="vr mx-4"></div>
+                    <div style={{ flex: "auto" }}>
                       <div className="d-flex">
                         <h5 className="card-subtitle mb-2">
                           <Link to={"/users/" + author.username}>

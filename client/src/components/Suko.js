@@ -7,7 +7,6 @@ const Suko = (props) => {
   const [sukoCount, setSukoCount] = useState(props.sukoCount);
   const [sukod, setSukod] = useState(props.sukod);
   const navigate = useNavigate();
-  const { page } = props;
 
   const sukoPost = async () => {
     if (user) {
@@ -41,69 +40,31 @@ const Suko = (props) => {
     });
   };
 
-  const getUnSukoStyling = () => {
-    if (page == "posts") {
-      return "un-suko-big";
-    } else if (page == "postDetails") {
-      return "un-suko-small";
-    } else {
-      return "invalid";
-    }
-  };
-
-  const getSukoStyling = () => {
-    if (page == "posts") {
-      return "suko-big";
-    } else if (page == "postDetails") {
-      return "suko-small";
-    } else {
-      return "invalid";
-    }
-  };
-
   return (
     <div>
       {sukod ? (
-        <div
-          className="d-flex flex-column align-items-center"
-          style={{ paddingRight: "10px" }}
-        >
+        <div className="d-flex flex-column align-items-center">
           <input
-            className={getUnSukoStyling()}
+            className={"un-suko-small"}
             type="button"
             value=""
             onClick={unSukoPost}
           />
-          {page === "posts" ? (
-            <h2 className="my-2" style={{ color: "var(--bs-ternary)" }}>
-              {sukoCount}
-            </h2>
-          ) : (
-            <h4 className="my-2" style={{ color: "var(--bs-ternary)" }}>
-              {sukoCount}
-            </h4>
-          )}
+          <h4 className="my-2" style={{ color: "var(--bs-ternary)" }}>
+            {sukoCount}
+          </h4>
         </div>
       ) : (
-        <div
-          className="d-flex flex-column align-items-center"
-          style={{ paddingRight: "10px" }}
-        >
+        <div className="d-flex flex-column align-items-center">
           <input
-            className={getSukoStyling()}
+            className={"suko-small"}
             type="button"
             value=""
             onClick={sukoPost}
           />
-          {page === "posts" ? (
-            <h2 className="my-2" style={{ color: "var(--bs-ternary)" }}>
-              {sukoCount}
-            </h2>
-          ) : (
-            <h4 className="my-2" style={{ color: "var(--bs-ternary)" }}>
-              {sukoCount}
-            </h4>
-          )}
+          <h4 className="my-2" style={{ color: "var(--bs-ternary)" }}>
+            {sukoCount}
+          </h4>
         </div>
       )}
     </div>

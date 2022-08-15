@@ -270,7 +270,7 @@ background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;    cursor: pointer;
 }
 
 .stats {
-    margin-left: 125px;
+    text-align: center;
 }
 
 .nav-link {
