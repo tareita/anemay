@@ -22,12 +22,7 @@ const Post = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="card mb-3 post"
-      onClick={() => {
-        navigate("/posts/" + topic.name + "/" + _id);
-      }}
-    >
+    <div className="card mb-3 post">
       <div className="card-body">
         <div className="container">
           <div className="d-flex flex-direction-start">
@@ -35,7 +30,12 @@ const Post = (props) => {
               <Suko sukod={sukod} sukoCount={sukoCount} postId={_id} />
             </div>
             <div className="vr mx-4"></div>
-            <div style={{ flex: "auto" }}>
+            <div
+              style={{ flex: "auto", cursor: "pointer" }}
+              onClick={() => {
+                navigate("/posts/" + topic.name + "/" + _id);
+              }}
+            >
               <div className="d-flex justify-content-between">
                 <h3 className="card-title">{title}</h3>{" "}
                 <h6>
