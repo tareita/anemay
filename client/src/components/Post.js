@@ -20,7 +20,7 @@ const Post = (props) => {
   const moment = require("moment");
   moment().format();
   const navigate = useNavigate();
-
+  console.log(props.post);
   return (
     <div className="card mb-3 post">
       <div className="card-body">
