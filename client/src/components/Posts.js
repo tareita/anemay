@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../config";
+import Loading from "./Loading";
 import { Navbar } from "./Navbar";
 import Post from "./Post";
 
@@ -37,39 +38,43 @@ const Posts = () => {
 
   return (
     <div>
-      {topic && (
-        <div>
-          <Navbar />
-          <div className="container">
-            <div className="back-to-posts my-2">
-              <Link to={"/"}>
-                <i class="fa-solid fa-arrow-left"></i> Back to topics
-              </Link>
-            </div>
-
-            <h1 className="mb-4 topic-title">{topicName} </h1>
-            <div className="mb-4">
-              {user && topic.isLocked && !user.isAdmin ? (
-                <h4>
-                  <i class="fa-solid fa-lock"></i> This topic is locked.
-                </h4>
-              ) : (
-                <h4>
-                  <Link to={checkLoggedIn()}>
-                    <i class="fa-regular fa-pen-to-square"></i> Make your own
-                    post
-                  </Link>
-                </h4>
-              )}
-            </div>
-            <div>
-              {posts.map((post, index) => (
-                <Post post={post} key={index} />
-              ))}
-            </div>
+      <div>
+        <Navbar />
+        <div className="container">
+          <div className="back-to-posts my-2">
+            <Link to={"/"}>
+              <i class="fa-solid fa-arrow-left"></i> Back to topics
+            </Link>
           </div>
+
+          <h1 className="mb-4 topic-title">{topicName} </h1>
+          {topic ? (
+            <div>
+              <div className="mb-4">
+                {user && topic.isLocked && !user.isAdmin ? (
+                  <h4>
+                    <i class="fa-solid fa-lock"></i> This topic is locked.
+                  </h4>
+                ) : (
+                  <h4>
+                    <Link to={checkLoggedIn()}>
+                      <i class="fa-regular fa-pen-to-square"></i> Make your own
+                      post
+                    </Link>
+                  </h4>
+                )}
+              </div>
+              <div>
+                {posts.map((post, index) => (
+                  <Post post={post} key={index} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <Loading />
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
