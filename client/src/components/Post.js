@@ -15,6 +15,7 @@ const Post = (props) => {
     edited,
     topic,
     createdAt,
+    commentCount,
   } = props.post;
   const moment = require("moment");
   moment().format();
@@ -60,7 +61,8 @@ const Post = (props) => {
               </p>
               <div className="view-post">
                 <Link to={"/posts/" + topic.name + "/" + _id}>
-                  <i class="fa-regular fa-comment"></i> View comments
+                  <i class="fa-regular fa-comment"></i> View comments{" "}
+                  {"(" + commentCount + ")"}
                 </Link>
               </div>
             </div>
