@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ContentEditor from "./ContentEditor";
 import CreateComment from "./CreateComment";
 import { API_URL } from "../config";
+import ReactMarkdown from "react-markdown";
 
 const Comment = (props) => {
   const { author, content, repliedTo, _id } = props.comment;
@@ -108,7 +109,7 @@ const Comment = (props) => {
                 said:
               </h6>
               <p className="card-text" style={{ fontSize: "larger" }}>
-                {repliedTo.content}
+                <ReactMarkdown>{repliedTo.content}</ReactMarkdown>
               </p>
             </div>
           )}
@@ -122,7 +123,7 @@ const Comment = (props) => {
             </div>
           ) : (
             <p className="card-text" style={{ fontSize: "larger" }}>
-              {content}
+              <ReactMarkdown>{content}</ReactMarkdown>
             </p>
           )}
           <button
