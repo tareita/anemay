@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../config";
+import Loading from "./Loading";
 import { Navbar } from "./Navbar";
 import Post from "./Post";
 import UserAboutMe from "./UserAboutMe";
@@ -49,62 +50,69 @@ const UserProfile = () => {
         <h2 className="my-4" style={{ color: "var(--bs-ternary)" }}>
           {username}'s profile{" "}
         </h2>
-        <div className="row">
-          <div className="col-sm-4">
-            <div
-              className="card"
-              style={{ height: "350px", border: "1px solid black" }}
-            >
-              <UserAboutMe
-                profileUser={profileUser}
-                setProfileUser={setProfileUser}
-              />
+        {profileUser ? (
+          <div className="row">
+            <div className="col-sm-4">
+              <div
+                className="card"
+                style={{ height: "350px", border: "1px solid black" }}
+              >
+                <UserAboutMe
+                  profileUser={profileUser}
+                  setProfileUser={setProfileUser}
+                />
+              </div>
+              <div
+                className="stats mb-1"
+                style={{ color: "var(--bs-ternary)" }}
+              >
+                <span className="mx-1">Posts: {totalPosts}</span>{" "}
+                <span className="mx-1">Sukos: {totalSukos}</span>
+              </div>
             </div>
-            <div className="stats mb-1" style={{ color: "var(--bs-ternary)" }}>
-              <span className="mx-1">Posts: {totalPosts}</span>{" "}
-              <span className="mx-1">Sukos: {totalSukos}</span>
-            </div>
-          </div>
-          <div className="col-sm-8" style={{ maxWidth: "700px" }}>
-            <ul className="nav nav-tabs mb-4">
-              <li className="nav-item">
-                <a
-                  className={`nav-link ${tab == "posts" && "active"}`}
-                  onClick={() => {
-                    setTab("posts");
-                  }}
-                >
-                  Posts
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className={`nav-link ${tab == "comments" && "active"}`}
-                  onClick={() => {
-                    setTab("comments");
-                  }}
-                >
-                  Comments
-                </a>
-              </li>
-            </ul>
+            <div className="col-sm-8" style={{ maxWidth: "700px" }}>
+              <ul className="nav nav-tabs mb-4">
+                <li className="nav-item">
+                  <a
+                    className={`nav-link ${tab == "posts" && "active"}`}
+                    onClick={() => {
+                      setTab("posts");
+                    }}
+                  >
+                    Posts
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link ${tab == "comments" && "active"}`}
+                    onClick={() => {
+                      setTab("comments");
+                    }}
+                  >
+                    Comments
+                  </a>
+                </li>
+              </ul>
 
-            {tab == "posts" && (
-              <div>
-                {posts.map((post, index) => (
-                  <Post post={post} key={index} page={"postDetails"} />
-                ))}
-              </div>
-            )}
-            {tab == "comments" && (
-              <div>
-                {comments.map((comment, index) => (
-                  <UserComment comment={comment} key={index} />
-                ))}
-              </div>
-            )}
+              {tab == "posts" && (
+                <div>
+                  {posts.map((post, index) => (
+                    <Post post={post} key={index} page={"postDetails"} />
+                  ))}
+                </div>
+              )}
+              {tab == "comments" && (
+                <div>
+                  {comments.map((comment, index) => (
+                    <UserComment comment={comment} key={index} />
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        ) : (
+          <Loading />
+        )}
       </div>
     </div>
   );

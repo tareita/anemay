@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../config";
+import Loading from "./Loading";
 import { Navbar } from "./Navbar";
 import NotificationCard from "./NotificationCard";
 
@@ -24,14 +25,15 @@ const NotificationsPage = () => {
   };
 
   return (
-    notifications && (
-      <div>
-        <Navbar />
-        <div className="container notif-container">
-          <h2 className="my-4 title" style={{ color: "var(--bs-ternary)" }}>
-            Notifications <i className="fa-solid fa-bell mx-2" />
-          </h2>
-          {notifications.map((notification, index) => {
+    <div>
+      <Navbar />
+      <div className="container notif-container">
+        <h2 className="my-4 title" style={{ color: "var(--bs-ternary)" }}>
+          Notifications <i className="fa-solid fa-bell mx-2" />
+        </h2>
+
+        {notifications ? (
+          notifications.map((notification, index) => {
             if (notification.post) {
               return (
                 <NotificationCard
@@ -41,10 +43,12 @@ const NotificationsPage = () => {
                 />
               );
             }
-          })}
-        </div>
+          })
+        ) : (
+          <Loading />
+        )}
       </div>
-    )
+    </div>
   );
 };
 
