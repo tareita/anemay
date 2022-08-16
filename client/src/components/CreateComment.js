@@ -33,10 +33,18 @@ const CreateComment = (props) => {
       <div className="card-body">
         <form>
           <div className="mb-3">
-            <label className="form-label">
-              {" "}
-              <i class="fa-regular fa-pen-to-square"></i> Create a comment:
-            </label>
+            <div className="d-flex justify-content-between ternary-link">
+              <label className="form-label">
+                {" "}
+                <i class="fa-regular fa-pen-to-square"></i> Create a comment:
+              </label>{" "}
+              <div>
+                Check out the{" "}
+                <a href="https://commonmark.org/help/" target="_blank">
+                  markdown help!
+                </a>
+              </div>
+            </div>
             <textarea
               rows={3}
               className="form-control"

@@ -128,16 +128,6 @@ a:hover {
     -webkit-box-orient: vertical;
 }
 
-
-.un-suko-big {
-    background: url(https://i.imgur.com/Q0riDEW.png) no-repeat;
-    cursor: pointer;
-    border: none;
-    background-size: 75px;
-    width: 75px;
-    height: 75px;
-}
-
 .un-suko-small {
     background: url(https://i.imgur.com/Q0riDEW.png) no-repeat;
     cursor: pointer;
@@ -145,14 +135,6 @@ a:hover {
     background-size: 40px;
     width: 40px;
     height: 40px;
-}
-
-.suko-big {
-background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;    cursor: pointer;
-    border: none;
-    background-size: 75px;
-    width: 75px;
-    height: 75px;
 }
 
 .suko-small {
@@ -202,21 +184,14 @@ background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;    cursor: pointer;
     border: 1px solid black
 }
 
-.comment a {
+.ternary-link a {
     color: var(--bs-ternary);
 }
 
-.comment a:hover {
+.ternary-link a:hover {
     color: var(--bs-white);
 }
 
-.post-details .card-subtitle a{
-    color: var(--bs-ternary);
-}
-
-.post-details .card-subtitle a:hover {
-    color: var(--bs-white);
-}
 
 .post-details .author-section {
     margin-left: auto;
@@ -252,6 +227,7 @@ background: url(https://i.imgur.com/ZW5Fbao.png) no-repeat;    cursor: pointer;
 .create-post .title {
     color: var(--bs-ternary);
 }
+
 
 .form-control {
     background-color: var(--bs-secondary);

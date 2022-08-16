@@ -87,7 +87,7 @@ const PostDetails = () => {
                     <div className="vr mx-4"></div>
                     <div style={{ flex: "auto" }}>
                       <div className="d-flex">
-                        <h5 className="card-subtitle mb-2">
+                        <h5 className="ternary-link mb-2">
                           <Link to={"/users/" + author.username}>
                             <i class="fa-regular fa-user" /> {author.username}
                           </Link>
@@ -149,7 +149,7 @@ const PostDetails = () => {
                           />
                         </div>
                       ) : (
-                        <p className="card-text">
+                        <p className="card-text ternary-link">
                           <ReactMarkdown>{content}</ReactMarkdown>
                         </p>
                       )}
