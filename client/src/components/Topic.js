@@ -11,7 +11,7 @@ const Topic = (props) => {
               <div className="d-flex justify-content-between">
                 <div>{props.topic}</div>
                 <i
-                  class="fa-solid fa-lock fa-xl my-3"
+                  class="fa-solid fa-bullhorn fa-xl my-3"
                   style={{ color: "var(--bs-muted-white)" }}
                 ></i>
               </div>
