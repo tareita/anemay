@@ -157,14 +157,25 @@ a:hover {
 
 .post-content {
     font-size:large;
+    max-width: 1000px;
 }
 
-.view-post a{
-    color: var(--bs-ternary);
+.post {
+    border: 1px solid black;
+    max-width: 1500px;
+    max-height: 750px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.view-post a:hover {
-    color: var(--bs-white);
+.post-details {
+    max-width: 1500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-details .content {
+    max-width: 1100px;
 }
 
 .back-to-posts a{
@@ -176,9 +187,7 @@ a:hover {
     color: var(--bs-ternary);
 }
 
-.post {
-    border: 1px solid black;
-}
+
 
 .comment {
     border: 1px solid black

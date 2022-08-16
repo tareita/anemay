@@ -1,6 +1,7 @@
 const Comment = require("../models/Comment");
 const User = require("../models/User");
 const Notification = require("../models/Notification");
+const Post = require("../models/Post");
 
 const getUserComments = async (req, res) => {
   const { username } = req.params;
@@ -67,6 +68,11 @@ const createComment = async (req, res) => {
 
   await comment.save();
 
+  const post = await Post.findById(postId);
+  const postComments = await Comment.find({ post: postId });
+  post.commentCount = postComments.length;
+  await post.save();
+
   return res.send({ comment });
 };
 
@@ -81,7 +87,13 @@ const deleteComment = async (req, res) => {
   if (userId != comment.author && !isAdmin) {
     return res.send({ message: "you cant delete someone elses comment" });
   }
+
   await comment.deleteOne();
+  const post = await Post.findById(comment.post);
+  const postComments = await Comment.find({ post: comment.post });
+  post.commentCount = postComments.length;
+  await post.save();
+
   return res.send(comment);
 };
 
