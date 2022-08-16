@@ -53,6 +53,7 @@ const PostDetails = () => {
     e.preventDefault();
     await fetch(API_URL + "posts/" + id, {
       method: "PATCH",
+      body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json", token: user.token },
     });
     setPost({ ...post, content: formData.content, edited: true });
