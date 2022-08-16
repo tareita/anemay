@@ -13,6 +13,7 @@ const PostDetails = () => {
   const { topicName, id } = useParams();
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
+  const [commentCount, setCommentCount] = useState(0);
   const [editing, setEditing] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const { title, content, author, sukoCount, sukod } = post;
@@ -36,6 +37,7 @@ const PostDetails = () => {
     const data = await res.json();
     setPost(data.post);
     setComments(data.comments);
+    setCommentCount(data.commentCount);
   };
 
   const handleDeletePost = async (e) => {
