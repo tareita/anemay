@@ -45,7 +45,7 @@ const Comment = (props) => {
 
   return (
     <div>
-      <div className="card mb-3 comment">
+      <div className="card mb-3 comment ternary-link">
         <div className="card-body">
           <div className="d-flex">
             <h5 className="card-subtitle mb-2 text-muted">

@@ -30,13 +30,21 @@ const CreatePost = () => {
   return (
     <div>
       <Navbar />
-      <div className="container create-post">
+      <div className="container create-post ternary-link">
         <h3 className="my-4 title">What would you like to post?</h3>
         <form>
           <div className="mb-4">
-            <label className="form-label mb-0">
-              <h5>Title</h5>
-            </label>
+            <div className="d-flex justify-content-between">
+              <label className="form-label mb-0">
+                <h5>Title</h5>
+              </label>
+              <div>
+                Want to add a link or image? Check out the{" "}
+                <a href="https://commonmark.org/help/" target="_blank">
+                  markdown help
+                </a>
+              </div>
+            </div>
             <input
               className="form-control"
               value={formData.title}

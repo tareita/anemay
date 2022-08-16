@@ -31,13 +31,17 @@ const NotificationsPage = () => {
           <h2 className="my-4 title" style={{ color: "var(--bs-ternary)" }}>
             Notifications <i className="fa-solid fa-bell mx-2" />
           </h2>
-          {notifications.map((notification, index) => (
-            <NotificationCard
-              notification={notification}
-              key={index}
-              timestamp={moment(notification.createdAt).fromNow()}
-            />
-          ))}
+          {notifications.map((notification, index) => {
+            if (notification.post) {
+              return (
+                <NotificationCard
+                  notification={notification}
+                  key={index}
+                  timestamp={moment(notification.createdAt).fromNow()}
+                />
+              );
+            }
+          })}
         </div>
       </div>
     )
