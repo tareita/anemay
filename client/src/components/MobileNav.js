@@ -15,7 +15,7 @@ const MobileNav = (props) => {
               aria-expanded="false"
               style={{ color: "var(--bs-primary)" }}
             >
-              Dropleft
+              ...
             </button>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
