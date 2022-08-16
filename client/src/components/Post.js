@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import Suko from "./Suko";
+import { useNavigate } from "react-router-dom";
 
 const Post = (props) => {
   const {
@@ -15,12 +16,17 @@ const Post = (props) => {
     topic,
     createdAt,
   } = props.post;
-  const { page } = props;
   const moment = require("moment");
   moment().format();
+  const navigate = useNavigate();
 
   return (
-    <div className="card mb-3 post">
+    <div
+      className="card mb-3 post"
+      onClick={() => {
+        navigate("/posts/" + topic.name + "/" + _id);
+      }}
+    >
       <div className="card-body">
         <div className="container">
           <div className="d-flex flex-direction-start">
@@ -54,7 +60,7 @@ const Post = (props) => {
               </p>
               <div className="view-post">
                 <Link to={"/posts/" + topic.name + "/" + _id}>
-                  <i class="fa-regular fa-eye"></i> View post.
+                  <i class="fa-regular fa-comment"></i> View comments
                 </Link>
               </div>
             </div>
