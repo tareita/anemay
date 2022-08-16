@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
 dotenv.config();
-const { Schema } = mongoose;
 const posts = require("./routes/posts");
 const users = require("./routes/users");
 const comments = require("./routes/comments");

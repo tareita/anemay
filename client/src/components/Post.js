@@ -59,7 +59,7 @@ const Post = (props) => {
               <p className="card-text crop-text-1 my-2 post-content">
                 <ReactMarkdown>{content}</ReactMarkdown>
               </p>
-              <div className="view-post">
+              <div className="ternary-link">
                 <Link to={"/posts/" + topic.name + "/" + _id}>
                   <i class="fa-regular fa-comment"></i> View comments{" "}
                   {"(" + commentCount + ")"}

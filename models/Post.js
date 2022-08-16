@@ -20,6 +20,7 @@ const postSchema = new mongoose.Schema(
     },
     sukoCount: Number,
     edited: Boolean,
+    commentCount: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

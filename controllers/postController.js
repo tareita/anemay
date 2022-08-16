@@ -69,7 +69,7 @@ const getPost = async (req, res) => {
       path: "repliedTo",
       populate: { path: "author", model: "User" },
     });
-  return res.send({ post, comments });
+  return res.send({ post, comments, commentCount: comments.length });
 };
 
 const getUserPosts = async (req, res) => {
@@ -117,9 +117,16 @@ const createPost = async (req, res) => {
     author: authorId,
     topic: topic._id,
     sukoCount: 0,
+    commentCount: 0,
   });
-  await post.save();
-  return res.send({ post });
+
+  try {
+    await post.save();
+  } catch (err) {
+    return res.send({ message: err.message });
+  }
+
+  return res.send({ post, success: true });
 };
 
 const sukoPost = async (req, res) => {
@@ -163,7 +170,7 @@ const unsukoPost = async (req, res) => {
     return res.send({ message: "like doesnt exist" });
   }
 
-  const existingNotification = await Notification.deleteOne({
+  await Notification.deleteOne({
     post: postId,
     user: userId,
     notificationType: "postSuko",
@@ -189,22 +196,27 @@ const deletePost = async (req, res) => {
   }
   await post.deleteOne();
   await Comment.deleteMany({ post: post._id });
+  await Notification.deleteMany({ post: post._id });
   return res.send(post);
 };
 
 const updatePost = async (req, res) => {
   const postId = req.params.id;
-  const isAdmin = req.user.isAdmin;
-  const { title, content } = req.body;
   const userId = req.user.id;
+  const isAdmin = req.user.isAdmin;
+  const { content } = req.body;
+
   const post = await Post.findOne({ _id: postId });
+
   if (!post) {
-    return res.send("post not found");
+    return res.send({ message: "post not found" });
   }
-  if (userId != post.author && !isAdmin) {
-    return res.send("post isnt yours");
+
+  if (post.author != userId && !isAdmin) {
+    return res.send({ message: "post isnt yours" });
   }
-  await post.updateOne({ title, content, edited: true });
+
+  await post.updateOne({ content, edited: true });
   return res.send(post);
 };
 

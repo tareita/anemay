@@ -19,6 +19,11 @@ const getNotifications = async (req, res) => {
 const getNotificationCount = async (req, res) => {
   const user = req.user;
   const notifications = await Notification.find({ read: false, user: user.id });
+
+  if (!notifications) {
+    return res.send({ count: 0 });
+  }
+
   return res.send({ count: notifications.length });
 };
 

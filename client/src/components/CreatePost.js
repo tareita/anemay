@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../config";
+import ErrorAlert from "./ErrorAlert";
 import { Navbar } from "./Navbar";
 
 const CreatePost = () => {
   const { topicName } = useParams();
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
+  const [error, setError] = useState();
   const user = JSON.parse(localStorage.getItem("user"));
   const handleFormDataChange = (e) => {
     setFormData({
@@ -24,9 +26,14 @@ const CreatePost = () => {
       headers: { "Content-Type": "application/json", token: user.token },
     });
     const data = await res.json();
-    const id = data.post._id;
-    navigate("/posts/" + topicName + "/" + id);
+    if (data.success) {
+      const id = data.post._id;
+      navigate("/posts/" + topicName + "/" + id);
+    } else {
+      setError(data.message);
+    }
   };
+
   return (
     <div>
       <Navbar />
@@ -66,6 +73,7 @@ const CreatePost = () => {
               name="content"
             />
           </div>
+          <ErrorAlert error={error} />
           <button
             type="submit"
             className="btn"

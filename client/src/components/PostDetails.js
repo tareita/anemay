@@ -59,6 +59,7 @@ const PostDetails = () => {
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json", token: user.token },
     });
+
     setPost({ ...post, content: formData.content, edited: true });
     setEditing(false);
   };
@@ -152,7 +153,7 @@ const PostDetails = () => {
                             />
                           </div>
                         ) : (
-                          <p className="card-text ternary-link">
+                          <p className="card-text ternary-link content">
                             <ReactMarkdown>{content}</ReactMarkdown>
                           </p>
                         )}
