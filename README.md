@@ -17,11 +17,11 @@ Deployed at: https://anemay.herokuapp.com/
 ## Installation and usage
 1) Clone this repository  
 ```
-git clone https://github.com/ihtasham42/social-media-app.git
+git clone https://github.com/tareita/anemay.git
 ```
 2) Install dependencies  
 ```
-cd social-media-app  
+cd anemay  
 npm install
 cd client
 npm install
@@ -43,7 +43,7 @@ npm run server
 ```
 6) Start a new terminal and run react's development server
 ```
-cd social-media-app
+cd anemay
 cd client
 npm start
 ```
