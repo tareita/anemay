@@ -12,6 +12,9 @@ const register = async (req, res) => {
   if (existingEmail) {
     return res.send({ message: "User with same email exists" });
   }
+  if (!password || !username || !email) {
+    return res.send({ message: "All fields must have input" });
+  }
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = new User({
     username,
@@ -19,11 +22,13 @@ const register = async (req, res) => {
     password: hashedPassword,
     aboutMe,
   });
+
   try {
     await user.save();
   } catch (err) {
     return res.send({ message: err.message });
   }
+
   const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
   return res.send({ username: user.username, token, success: true });
 };
@@ -49,6 +54,7 @@ const login = async (req, res) => {
     token,
     success: true,
   };
+
   return res.send(responseData);
 };
 
