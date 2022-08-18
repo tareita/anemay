@@ -15,6 +15,12 @@ const register = async (req, res) => {
   if (!password || !username || !email) {
     return res.send({ message: "All fields must have input" });
   }
+
+  if (password.length < 8) {
+    return res.send({ message: "Password must be atleast 8 characters" });
+  }
+
+  console.log(password.minLength);
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = new User({
     username,
