@@ -55,7 +55,7 @@ const UserAboutMe = (props) => {
                 />
               </div>
             ) : (
-              <p className="card-text mb-2">
+              <p className="card-text mb-2 content">
                 {profileUser.aboutMe ? (
                   <div>{profileUser.aboutMe}</div>
                 ) : (

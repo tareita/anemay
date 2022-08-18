@@ -158,6 +158,7 @@ a:hover {
 .post-content {
     font-size:large;
     max-width: 1000px;
+    max-height: 500px;
 }
 
 .post {
@@ -253,6 +254,12 @@ a:hover {
 
 .about-me .card-header {
     padding-bottom: 1px;
+}
+
+.about-me .content{
+    max-height: 260px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .stats {
