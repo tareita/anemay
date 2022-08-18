@@ -3,52 +3,59 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
-  try {
-    const { username, email, password, aboutMe } = req.body;
-    const existingUsername = await User.findOne({ username });
-    if (existingUsername) {
-      return res.send({ message: "User with same username exists" });
-    }
-    const existingEmail = await User.findOne({ email });
-    if (existingEmail) {
-      return res.send({ message: "User with same email exists" });
-    }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({
-      username,
-      email,
-      password: hashedPassword,
-      aboutMe,
-    });
-    await user.save();
-    const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
-    return res.send({ username: user.username, token, success: true });
-  } catch (err) {
-    console.log(err.message);
+  const { username, email, password, aboutMe } = req.body;
+  const existingUsername = await User.findOne({ username });
+  if (existingUsername) {
+    return res.send({ message: "User with same username exists" });
   }
+  const existingEmail = await User.findOne({ email });
+  if (existingEmail) {
+    return res.send({ message: "User with same email exists" });
+  }
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = new User({
+    username,
+    email,
+    password: hashedPassword,
+    aboutMe,
+  });
+  try {
+    await user.save();
+  } catch (err) {
+    return res.send({ message: err.message });
+  }
+  const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
+  return res.send({ username: user.username, token, success: true });
 };
 
 const login = async (req, res) => {
-  const { username, password } = req.body;
-  const existingUser = await User.findOne({ username }).select("+password");
-  if (!existingUser) {
-    return res.send({ message: "Incorrect username or password." });
-  }
-  const isPasswordValid = await bcrypt.compare(password, existingUser.password);
-  if (!isPasswordValid) {
-    return res.send({ message: "Incorrect username or password." });
-  }
-  const token = jwt.sign(
-    { id: existingUser._id, isAdmin: existingUser.isAdmin },
-    process.env.SECRET_KEY
-  );
+  try {
+    const { username, password } = req.body;
+    const existingUser = await User.findOne({ username }).select("+password");
+    if (!existingUser) {
+      return res.send({ message: "Incorrect username or password." });
+    }
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
+    if (!isPasswordValid) {
+      return res.send({ message: "Incorrect username or password." });
+    }
+    const token = jwt.sign(
+      { id: existingUser._id, isAdmin: existingUser.isAdmin },
+      process.env.SECRET_KEY
+    );
 
-  const responseData = {
-    username: existingUser.username,
-    isAdmin: existingUser.isAdmin,
-    token,
-    success: true,
-  };
+    const responseData = {
+      username: existingUser.username,
+      isAdmin: existingUser.isAdmin,
+      token,
+      success: true,
+    };
+  } catch (err) {
+    return res.send({ message: err.message });
+  }
 
   return res.send(responseData);
 };
