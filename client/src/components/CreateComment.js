@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../config";
+import ErrorAlert from "./ErrorAlert";
 
 const CreateComment = (props) => {
   const { post, comments, setComments, repliedTo, setReplying } = props;
   const user = JSON.parse(localStorage.getItem("user"));
   const [formData, setFormData] = useState({});
+  const [error, setError] = useState();
 
   const handleFormDataChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,9 +25,14 @@ const CreateComment = (props) => {
       headers: { "Content-Type": "application/json", token: user.token },
     });
     const data = await res.json();
-    const comment = data.comment;
-    setComments([...comments, comment]);
-    setFormData({ ...formData, content: "" });
+
+    if (data.success) {
+      const comment = data.comment;
+      setComments([...comments, comment]);
+      setFormData({ ...formData, content: "" });
+    } else {
+      setError(data.message);
+    }
   };
 
   return user ? (
@@ -53,7 +60,7 @@ const CreateComment = (props) => {
               name="content"
             />
           </div>
-
+          <ErrorAlert error={error} />
           <button
             type="submit"
             className="btn"

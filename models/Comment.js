@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema(
   {
-    content: String,
+    content: {
+      type: String,
+      maxLength: [5000, "Comment should not exceed 5000 characters"],
+    },
     author: {
       type: mongoose.Types.ObjectId,
       ref: "User",

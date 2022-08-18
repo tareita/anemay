@@ -29,34 +29,26 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const existingUser = await User.findOne({ username }).select("+password");
-    if (!existingUser) {
-      return res.send({ message: "Incorrect username or password." });
-    }
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      existingUser.password
-    );
-    if (!isPasswordValid) {
-      return res.send({ message: "Incorrect username or password." });
-    }
-    const token = jwt.sign(
-      { id: existingUser._id, isAdmin: existingUser.isAdmin },
-      process.env.SECRET_KEY
-    );
-
-    const responseData = {
-      username: existingUser.username,
-      isAdmin: existingUser.isAdmin,
-      token,
-      success: true,
-    };
-  } catch (err) {
-    return res.send({ message: err.message });
+  const { username, password } = req.body;
+  const existingUser = await User.findOne({ username }).select("+password");
+  if (!existingUser) {
+    return res.send({ message: "Incorrect username or password." });
   }
+  const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+  if (!isPasswordValid) {
+    return res.send({ message: "Incorrect username or password." });
+  }
+  const token = jwt.sign(
+    { id: existingUser._id, isAdmin: existingUser.isAdmin },
+    process.env.SECRET_KEY
+  );
 
+  const responseData = {
+    username: existingUser.username,
+    isAdmin: existingUser.isAdmin,
+    token,
+    success: true,
+  };
   return res.send(responseData);
 };
 

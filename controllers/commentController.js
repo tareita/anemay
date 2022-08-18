@@ -65,15 +65,18 @@ const createComment = async (req, res) => {
       notifier: comment.author._id,
     });
   }
-
-  await comment.save();
+  try {
+    await comment.save();
+  } catch (err) {
+    return res.send({ message: err.message });
+  }
 
   const post = await Post.findById(postId);
   const postComments = await Comment.find({ post: postId });
   post.commentCount = postComments.length;
   await post.save();
 
-  return res.send({ comment });
+  return res.send({ comment, success: true });
 };
 
 const deleteComment = async (req, res) => {
