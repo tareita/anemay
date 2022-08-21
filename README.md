@@ -48,3 +48,6 @@ cd client
 npm start
 ```
 ## Screenshots
+
+![image](https://user-images.githubusercontent.com/101207404/185810891-30dcd0f7-0924-4118-8779-522c5ee50b83.png)
+
