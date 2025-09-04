@@ -15,7 +15,7 @@ Deployed at: https://anemay.herokuapp.com/
 - Fully responsive layout
 
 ## Installation and usage
-1) Clone this repository  
+1) Clone this repository 
 ```
 git clone https://github.com/tareita/anemay.git
 ```
